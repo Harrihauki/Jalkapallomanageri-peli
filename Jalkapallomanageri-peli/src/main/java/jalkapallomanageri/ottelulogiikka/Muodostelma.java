@@ -121,7 +121,16 @@ public class Muodostelma {
 
         System.out.println("Mille pelipaikalle haluat pelaajan? ");
         
-        int pelipaikka = Integer.parseInt(lukija.nextLine());
+        int pelipaikka;
+        
+        try {
+            pelipaikka = Integer.parseInt(lukija.nextLine());
+        } catch(Exception e) {
+            
+            System.out.println("Käytäthän numeroita pelipaikan kirjoittamiseen");
+            
+            pelipaikka = Integer.parseInt(lukija.nextLine());
+        }
 
         while (pelipaikkaaEiOle(pelipaikka)) {
             System.out.println("Pelipaikkaa ei ole.");
