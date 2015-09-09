@@ -5,6 +5,10 @@
  */
 package jalkapallomanageri.jalkapallomanageri.peli;
 
+import jalkapallomanageri.domain.Joukkue;
+import jalkapallomanageri.pelaajaGeneraattori.Pelaajageneraattori;
+import java.util.Random;
+
 /**
  *
  * @author lallimyl
@@ -16,6 +20,13 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        Random arpoja = new Random();
+        Pelaajageneraattori generaattori = new Pelaajageneraattori(arpoja);
+        Joukkue joukkue = new Joukkue("PuiU");
+        
+        joukkue.generoiPelaajat(generaattori);
+        System.out.println(joukkue.getPelaajat().size());
     }
     
 }

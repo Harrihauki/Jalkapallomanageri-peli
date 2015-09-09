@@ -16,12 +16,12 @@ import static org.junit.Assert.*;
  *
  * @author lallimyl
  */
-public class KenttapelaajaTest {
+public class PelaajaTest {
     
-    public KenttapelaajaTest() {
+    public PelaajaTest() {
     }
     
-    Kenttapelaaja pelaaja;
+    Pelaaja pelaaja;
     
     @BeforeClass
     public static void setUpClass() {
@@ -34,7 +34,7 @@ public class KenttapelaajaTest {
     @Before
     public void setUp() {
         
-        pelaaja = new Kenttapelaaja("Seppo Teppo", 3, 3, 3, 3, 3, 3);
+        pelaaja = new Pelaaja("Seppo Teppo", 3, 3, 3, 3, 3, 3, 3);
     }
     
     @After
@@ -50,7 +50,7 @@ public class KenttapelaajaTest {
     @Test
     public void pelaajanKonstruktoriToimii() {
         
-        assertEquals("Seppo Teppo\nPaikanhaku: 3\nNopeus: 3\nMaalinteko: 3\nSyöttäminen: 3\nPuolustus: 3\nHarhauttaminen: 3\nLoukkaantunut: false", pelaaja.toString());
+        assertEquals("Seppo Teppo\nSijoittuminen: 3\nNopeus: 3\nMaalinteko: 3\nSyöttäminen: 3\nPuolustus: 3\nHarhauttaminen: 3\nMaalivahti: 3\nLoukkaantunut: false", pelaaja.toString());
     }
     
     @Test
