@@ -45,19 +45,14 @@ public class Muodostelma {
 
             int sijainti = kysySijaintia(lukija);
 
-            while (sijaintiaEiOle(sijainti)) {
-
-                System.out.println("Sijaintia ei ole.");
-
-                sijainti = kysySijaintia(lukija);
-            }
-
             while (pelipaikkaOnVarattu(pelipaikka, sijainti)) {
 
                 System.out.println("Sijainnissa on jo pelaaja.");
 
                 sijainti = kysySijaintia(lukija);
             }
+            
+            this.lisaaPelaajaPaikalleen(asetettavanPelaajanNimi, pelipaikka, sijainti, pelaajat);
 
         }
     }
@@ -156,7 +151,25 @@ public class Muodostelma {
 
         System.out.println("Mille sijainnille pelaajan haluat?");
 
-        return Integer.parseInt(lukija.nextLine());
+        int sijainti;
+        
+        try {
+            sijainti = Integer.parseInt(lukija.nextLine());
+        } catch(Exception e) {
+            
+            System.out.println("Käytäthän numeroita sijainnin kirjoittamiseen");
+            
+            sijainti = Integer.parseInt(lukija.nextLine());
+        }
+        
+        while(this.sijaintiaEiOle(sijainti)) {
+            
+            System.out.println("Sijaintia ei ole");
+            
+            sijainti = Integer.parseInt(lukija.nextLine());
+        }
+        
+        return sijainti;
     }
 
     private void setMaalivahti(Scanner lukija, Map<String, Pelaaja> pelaajat) {
@@ -195,17 +208,17 @@ public class Muodostelma {
         return false;
     }
 
-    private boolean maalivahtiaEiVielaAsetettu() {
-
-        if (this.maalivahti == null) {
-
-            return true;
-        }
-
-        System.out.println("Maalivahti on jo asetettu.");
-
-        return false;
-    }
+//    private boolean maalivahtiaEiVielaAsetettu() {
+//
+//        if (this.maalivahti == null) {
+//
+//            return true;
+//        }
+//
+//        System.out.println("Maalivahti on jo asetettu.");
+//
+//        return false;
+//    }
 
     private boolean pelaajaaEiOle(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
 
@@ -215,6 +228,18 @@ public class Muodostelma {
         }
 
         return false;
+    }
+
+    private void lisaaPelaajaPaikalleen(String asetettavanPelaajanNimi, int pelipaikka, int sijainti, Map<String, Pelaaja> pelaajat) {
+        
+        if (this.pelipaikat.containsKey(pelipaikka)) {
+            
+            this.pelipaikat.get(pelipaikka).put(sijainti, pelaajat.get(asetettavanPelaajanNimi));
+        } else {
+            
+            this.pelipaikat.put(pelipaikka, new HashMap<Integer, Pelaaja>());
+            this.pelipaikat.get(pelipaikka).put(sijainti, pelaajat.get(asetettavanPelaajanNimi));
+        }
     }
 
 }
