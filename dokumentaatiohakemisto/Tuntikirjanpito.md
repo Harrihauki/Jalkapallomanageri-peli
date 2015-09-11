@@ -5,3 +5,5 @@
 9.9. 4h - Maalivahti-luokka poistettu ja Kaikille pelaajille lisätty Torjuminen-taito. Joukkue-luokkaa jatkettu ja Pelaajageneraattori-luokka luotu. Edit: Huijasin, jatkoin vielä 2h edellisen päivityksen jälkeen. Muodostelma-luokka luotu ja viritelty alkuun. Vielä vaiheessa, samoin testaus. Testaus piti väsätä ennen koodia, mutta ajattelin ensin vain vähän aloittelevani, mitä ei nyt sitten käynytkään..
 
 11.9. vol 1, 1,5h - Ensin tappelua githubin kanssa. Sitten vähän täydennystä Muodostelmaan, kunnes tajusin sotkevani käyttöliittymää muodostelman sovelluslogiikkaan. Nyt ottaa päähän. Palataan tira-laskareiden jälkeen..
+
+11.9. vol2, 3h - Käyttöliittymäelementtien poiskommentointia sovelluslogiikasta. Pieniä muokkauksia luokkiin, sekä KayttajanJoukkue- ja BottiJoukkue-luokkien luonti. Testien kirjoittamista. Pit-raportin luominen ja sen kanssa vääntäminen.
