@@ -35,7 +35,7 @@ public class Muodostelma {
 
         this.tulostaOhjeet(pelaajat);
 
-        this.setMaalivahti(lukija, pelaajat);
+        this.setMaalivahti(lukija, pelaajat, asetetutPelaajat);
 
         for (int i = 0; i < 10; i++) {
 
@@ -53,6 +53,7 @@ public class Muodostelma {
             }
             
             this.lisaaPelaajaPaikalleen(asetettavanPelaajanNimi, pelipaikka, sijainti, pelaajat);
+            asetetutPelaajat.add(asetettavanPelaajanNimi);
 
         }
     }
@@ -172,13 +173,14 @@ public class Muodostelma {
         return sijainti;
     }
 
-    private void setMaalivahti(Scanner lukija, Map<String, Pelaaja> pelaajat) {
+    private void setMaalivahti(Scanner lukija, Map<String, Pelaaja> pelaajat, List<String> asetetutPelaajat) {
 
         System.out.println("Valitse maalivahti:");
 
         String asetettavanPelaajanNimi = lukija.nextLine();
 
         this.maalivahti = pelaajat.get(asetettavanPelaajanNimi);
+        asetetutPelaajat.add(asetettavanPelaajanNimi);
 
         System.out.println("Maalivahti asetettu.");
         System.out.println("");
@@ -240,6 +242,9 @@ public class Muodostelma {
             this.pelipaikat.put(pelipaikka, new HashMap<Integer, Pelaaja>());
             this.pelipaikat.get(pelipaikka).put(sijainti, pelaajat.get(asetettavanPelaajanNimi));
         }
+        
+        System.out.println("Pelaaja asetettu");
+        System.out.println("");
     }
 
 }
