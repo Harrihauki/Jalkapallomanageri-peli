@@ -36,7 +36,7 @@ public class JoukkueTest {
     @Before
     public void setUp() {
         
-        joukkue = new Joukkue("PuiU");
+        joukkue = new KayttajanJoukkue("PuiU");
     }
     
     @After

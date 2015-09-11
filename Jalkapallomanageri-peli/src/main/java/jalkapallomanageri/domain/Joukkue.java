@@ -14,7 +14,7 @@ import java.util.Map;
  *
  * @author lallimyl
  */
-public class Joukkue {
+public abstract class Joukkue {
     
     Map<String, Pelaaja> pelaajat;
     String nimi;

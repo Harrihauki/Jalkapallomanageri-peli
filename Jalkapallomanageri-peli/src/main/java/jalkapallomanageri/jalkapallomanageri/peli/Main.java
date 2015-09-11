@@ -6,6 +6,7 @@
 package jalkapallomanageri.jalkapallomanageri.peli;
 
 import jalkapallomanageri.domain.Joukkue;
+import jalkapallomanageri.domain.KayttajanJoukkue;
 import jalkapallomanageri.pelaajaGeneraattori.Pelaajageneraattori;
 import java.util.Random;
 
@@ -23,7 +24,7 @@ public class Main {
         
         Random arpoja = new Random();
         Pelaajageneraattori generaattori = new Pelaajageneraattori(arpoja);
-        Joukkue joukkue = new Joukkue("PuiU");
+        Joukkue joukkue = new KayttajanJoukkue("PuiU");
         
         joukkue.generoiPelaajat(generaattori);
         System.out.println(joukkue.getPelaajat().size());

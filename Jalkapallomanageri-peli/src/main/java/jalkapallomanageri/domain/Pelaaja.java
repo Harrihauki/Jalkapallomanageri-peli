@@ -20,6 +20,8 @@ public class Pelaaja {
     int harhauttaminen;
     int maalivahti;
     boolean loukkaantunut;
+    int pelipaikka;
+    int sijainti;
     
     public Pelaaja(String nimi, int sijoittuminen, int nopeus, int maalinteko, int syottaminen, int puolustus, int harhauttaminen, int maalivahti) {
         
@@ -32,6 +34,8 @@ public class Pelaaja {
         this.harhauttaminen = harhauttaminen;
         this.maalivahti = maalivahti;
         this.loukkaantunut = false;
+        this.pelipaikka = 0;
+        this.sijainti = 0;
     }
     
     public String getNimi() {
@@ -93,6 +97,31 @@ public class Pelaaja {
     public void parane() {
         
         this.loukkaantunut = false;
+    }
+
+    public void setPelipaikka(int pelipaikka) {
+        
+        this.pelipaikka = pelipaikka;
+    }
+
+    public void setSijainti(int sijainti) {
+        
+        this.sijainti = sijainti;
+    }
+    
+    public int getPelipaikka() {
+        
+        return this.pelipaikka;
+    }
+    
+    public int getSijainti() {
+        
+        return this.sijainti;
+    }
+    
+    public String koordinaattiEsitys() {
+        
+        return "" + this.pelipaikka + "," + this.sijainti;
     }
     
 }
