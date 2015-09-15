@@ -5,6 +5,7 @@
  */
 package jalkapallomanageri.domain;
 
+import jalkapallomanageri.ottelulogiikka.Muodostelma;
 import jalkapallomanageri.pelaajaGeneraattori.Pelaajageneraattori;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,7 @@ public abstract class Joukkue {
     
     Map<String, Pelaaja> pelaajat;
     String nimi;
+    Muodostelma muodostelma;
     
     public Joukkue(String nimi) {
         
@@ -43,6 +45,11 @@ public abstract class Joukkue {
     public Map<String, Pelaaja> getPelaajat() {
         
         return this.pelaajat;
+    }
+    
+    public Muodostelma getMuodostelma() {
+        
+        return this.muodostelma;
     }
     
 }

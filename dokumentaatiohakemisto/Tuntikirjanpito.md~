@@ -7,3 +7,5 @@
 11.9. vol 1, 1,5h - Ensin tappelua githubin kanssa. Sitten vähän täydennystä Muodostelmaan, kunnes tajusin sotkevani käyttöliittymää muodostelman sovelluslogiikkaan. Nyt ottaa päähän. Palataan tira-laskareiden jälkeen..
 
 11.9. vol2, 3h - Käyttöliittymäelementtien poiskommentointia sovelluslogiikasta. Pieniä muokkauksia luokkiin, sekä KayttajanJoukkue- ja BottiJoukkue-luokkien luonti. Testien kirjoittamista. Pit-raportin luominen ja sen kanssa vääntäminen.
+
+15.9. 1,5h - Pit-raportin tutkintaa. Ottelu-luokka luotu, pahasti kesken. Ottelu-luokan testien alustusta tehty, mikä on hikistä hommaa, kun pitää luoda joukkueet melko perusteellisesti kunnon testejä varten..
