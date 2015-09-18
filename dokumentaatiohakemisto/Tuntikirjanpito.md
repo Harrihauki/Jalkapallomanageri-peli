@@ -9,3 +9,5 @@
 11.9. vol2, 3h - Käyttöliittymäelementtien poiskommentointia sovelluslogiikasta. Pieniä muokkauksia luokkiin, sekä KayttajanJoukkue- ja BottiJoukkue-luokkien luonti. Testien kirjoittamista. Pit-raportin luominen ja sen kanssa vääntäminen.
 
 15.9. 1,5h - Pit-raportin tutkintaa. Ottelu-luokka luotu, pahasti kesken. Ottelu-luokan testien alustusta tehty, mikä on hikistä hommaa, kun pitää luoda joukkueet melko perusteellisesti kunnon testejä varten..
+
+18.9. 3,5h - Ottelu-luokan jatkoa - lähinnä pelaajien etäisyyksiä - ja sen suunnittelua. Testit tehdyille metodeille. Hämäräperäisen vikailmoituksen tutkintaa. Vikailmoitus jäi hämäräperäiseksi.. Joukkue-luokkaan pieniä korjauksia. TiRa-kurssi kuritti harmillisen paljon tämän viikon aikaansaannoksia. Olisin halunnut saada paljon enemmän aikaan.

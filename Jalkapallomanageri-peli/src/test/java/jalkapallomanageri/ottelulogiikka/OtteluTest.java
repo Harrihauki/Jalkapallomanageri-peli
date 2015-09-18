@@ -5,6 +5,7 @@
  */
 package jalkapallomanageri.ottelulogiikka;
 
+import jalkapallomanageri.ottelulogiikka.Muodostelma;
 import jalkapallomanageri.domain.BottiJoukkue;
 import jalkapallomanageri.domain.Joukkue;
 import jalkapallomanageri.domain.Pelaaja;
@@ -73,12 +74,50 @@ public class OtteluTest {
     @Test
     public void kahdenPelaajanEtaisyydenLaskeminenOnnistuu() {
         
-        assertEquals(2.0, ottelu.etaisyys(poolinAvaus.get(1), poolinAvaus.get(8)));
+        assertEquals(2.0, ottelu.etaisyys(poolinAvaus.get(1), poolinAvaus.get(8)), 0.01);
     }
+    
+    @Test
+    public void pallottomanPelaajanJoukkueTunnistetaanOikeinKotipelaajalla() {
+        
+        assertTrue(ottelu.pallottomanJoukkueenPelaajat(poolinAvaus.get(0)).contains(arsunAvaus.get(0)));
+    }
+    
+    @Test
+    public void pallottomanPelaajanJoukkueTunnistetaanOikeinVieraspelaajalla() {
+        
+        assertTrue(ottelu.pallottomanJoukkueenPelaajat(arsunAvaus.get(0)).contains(poolinAvaus.get(0)));
+    }
+    
+    @Test
+    public void pallollisenPelaajanJoukkueTunnistetaanOikeinKotipelaajalla() {
+        
+        assertTrue(ottelu.pallollisenJoukkueenPelaajat(poolinAvaus.get(0)).contains(poolinAvaus.get(0)));
+    }
+    
+    @Test
+    public void pallollisenPelaajanJoukkueTunnistetaanOikeinVieraspelaajalla() {
+        
+        assertTrue(ottelu.pallollisenJoukkueenPelaajat(arsunAvaus.get(0)).contains(arsunAvaus.get(0)));
+    }
+    
+    @Test
+    public void omienPelaajienEtaisyyksissaEiHuomioidaPelaajaaItseaan() {
+        
+        assertEquals(9, ottelu.laskeOmienEtaisyydet(poolinAvaus.get(0)).size());
+    }
+    
+    @Test
+    public void vastustajanEtaisyyksiaOikeaMaara() {
+        
+        assertEquals(10, ottelu.laskeVastustajienEtaisyydet(arsunAvaus.get(0)).size());
+    }
+    
+    
 
     private void alustaJoukkueet() {
         
-        arsenal.getPelaajat().put("Walcott", new Pelaaja("Theo Walcott", 3, 3, 3, 3, 3, 3, 3));
+        arsenal.getPelaajat().put("Walcott", new Pelaaja("Walcott", 3, 3, 3, 3, 3, 3, 3));
         arsenal.getPelaajat().put("Mertesacker", new Pelaaja("Mertesacker", 3, 3, 3, 3, 3, 3, 3));
         arsenal.getPelaajat().put("Oxlade", new Pelaaja("Oxlade", 3, 3, 3, 3, 3, 3, 3));
         arsenal.getPelaajat().put("Coquellin", new Pelaaja("Coquellin", 3, 3, 3, 3, 3, 3, 3));

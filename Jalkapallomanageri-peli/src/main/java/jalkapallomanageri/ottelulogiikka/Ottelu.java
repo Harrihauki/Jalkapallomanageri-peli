@@ -18,6 +18,9 @@ import java.util.Random;
  */
 public class Ottelu {
     
+    //HUOM! Nyt ajateltuna voisi olla järkevää, että Ottelu-luokka tuntusu avauksien ja maalivahdin
+    //sijaan vain molempien joukkueiden Muodostelmat. Täytyy funtsia.
+    
     Joukkue koti;
     Joukkue vieras;
     List<Pelaaja> kotiAvaus;
@@ -58,11 +61,11 @@ public class Ottelu {
         this.pallonhaltija = pelaaja;
     }
     
-    public Map<Double, Pelaaja> laskeOmienEtaisyydet(Pelaaja pelaaja) {
+    public Map<Pelaaja, Double> laskeOmienEtaisyydet(Pelaaja pelaaja) {
         
-        List<Pelaaja> vertailtavatPelaajat = this.kummanPelaaja(pelaaja);
+        List<Pelaaja> vertailtavatPelaajat = this.pallollisenJoukkueenPelaajat(pelaaja);
         
-        Map<Double, Pelaaja> pelaajienEtaisyydet = new HashMap();
+        Map<Pelaaja, Double> pelaajienEtaisyydet = new HashMap();
         
         for (Pelaaja vertailtava : vertailtavatPelaajat) {
             
@@ -71,18 +74,44 @@ public class Ottelu {
                 continue;
             }
             
-            pelaajienEtaisyydet.put(etaisyys(pelaaja, vertailtava), vertailtava);
+            pelaajienEtaisyydet.put(vertailtava, etaisyys(pelaaja, vertailtava));
         }
+        
+        return pelaajienEtaisyydet;
+    }
+    
+    public Map<Pelaaja, Double> laskeVastustajienEtaisyydet(Pelaaja pelaaja) {
+        
+        List<Pelaaja> vertailtavatPelaajat = this.pallottomanJoukkueenPelaajat(pelaaja);
+        
+        Map<Pelaaja, Double> pelaajienEtaisyydet = new HashMap();
+        
+        for (Pelaaja vertailtava : vertailtavatPelaajat) {
+            
+            pelaajienEtaisyydet.put(vertailtava, etaisyys(pelaaja, vertailtava));
+        }
+        
+        return pelaajienEtaisyydet;
     }
 
-    private List<Pelaaja> kummanPelaaja(Pelaaja pelaaja) {
+    public List<Pelaaja> pallollisenJoukkueenPelaajat(Pelaaja pallollinenPelaaja) {
         
-        if (this.kotiAvaus.contains(pelaaja)) {
+        if (this.kotiAvaus.contains(pallollinenPelaaja)) {
             
             return this.kotiAvaus;
         }
         
         return this.vierasAvaus;
+    }
+    
+    public List<Pelaaja> pallottomanJoukkueenPelaajat(Pelaaja pallollinenPelaaja) {
+        
+        if (this.kotiAvaus.contains(pallollinenPelaaja)) {
+            
+            return this.vierasAvaus;
+        }
+        
+        return this.kotiAvaus;
     }
 
     public double etaisyys(Pelaaja pelaaja, Pelaaja vertailtava) {
@@ -91,4 +120,6 @@ public class Ottelu {
         
         return Math.sqrt(etaisyys);
     }
+    
+    
 }

@@ -8,7 +8,6 @@ package jalkapallomanageri.domain;
 import jalkapallomanageri.ottelulogiikka.Muodostelma;
 import jalkapallomanageri.pelaajaGeneraattori.Pelaajageneraattori;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,6 +24,7 @@ public abstract class Joukkue {
         
         this.nimi = nimi;
         this.pelaajat = new HashMap<>();
+        this.muodostelma = new Muodostelma();
     }
     
     public String getNimi() {
