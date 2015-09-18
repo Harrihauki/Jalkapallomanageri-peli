@@ -9,6 +9,7 @@ import jalkapallomanageri.domain.BottiJoukkue;
 import jalkapallomanageri.domain.Joukkue;
 import jalkapallomanageri.domain.Pelaaja;
 import java.util.List;
+import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -27,7 +28,12 @@ public class OtteluTest {
     List<Pelaaja> poolinAvaus;
     List<Pelaaja> arsunAvaus;
     
+    Ottelu ottelu;
+    Random arpoja;
+    
     public OtteluTest() {
+        
+        
     }
     
     @BeforeClass
@@ -46,9 +52,12 @@ public class OtteluTest {
         
         this.alustaJoukkueet();
         
+        poolinAvaus = liverpool.getMuodostelma().getAvauskentallinen();
+        arsunAvaus = arsenal.getMuodostelma().getAvauskentallinen();
         
+        arpoja = new Random();
         
-        
+        ottelu = new Ottelu(liverpool, arsenal, arpoja);
     }
     
     @After
@@ -60,6 +69,12 @@ public class OtteluTest {
     //
     // @Test
     // public void hello() {}
+    
+    @Test
+    public void kahdenPelaajanEtaisyydenLaskeminenOnnistuu() {
+        
+        assertEquals(2.0, ottelu.etaisyys(poolinAvaus.get(1), poolinAvaus.get(8)));
+    }
 
     private void alustaJoukkueet() {
         
@@ -99,6 +114,16 @@ public class OtteluTest {
         arsenal.getMuodostelma().lisaaPelaajaPaikalleen("Sagna", 1, 5, arsenal.getPelaajat());
         arsenal.getMuodostelma().setMaalivahti("Szcezny", arsenal.getPelaajat());
         
-        
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Clyne", 2, 1, liverpool.getPelaajat());
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Sakho", 1, 2, liverpool.getPelaajat());
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Coutinho", 4, 3, liverpool.getPelaajat());
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Can", 2, 3, liverpool.getPelaajat());
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Benteke", 5, 2, liverpool.getPelaajat());
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Milner", 3, 2, liverpool.getPelaajat());
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Henderson", 3, 4, liverpool.getPelaajat());
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Ings", 5, 4, liverpool.getPelaajat());
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Skrtel", 1, 4, liverpool.getPelaajat());
+        liverpool.getMuodostelma().lisaaPelaajaPaikalleen("Johnson", 2, 5, liverpool.getPelaajat());
+        liverpool.getMuodostelma().setMaalivahti("Mignolet", liverpool.getPelaajat());
     }
 }
