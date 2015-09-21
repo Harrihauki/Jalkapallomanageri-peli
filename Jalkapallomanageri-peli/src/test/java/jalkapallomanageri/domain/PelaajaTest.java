@@ -58,7 +58,7 @@ public class PelaajaTest {
         
         pelaaja.loukkaannu();
         
-        assertEquals(true, pelaaja.loukkaantunut);
+        assertEquals(true, pelaaja.getLoukkaantunut());
     }
     
     @Test
@@ -67,7 +67,7 @@ public class PelaajaTest {
         pelaaja.loukkaannu();
         pelaaja.parane();
         
-        assertEquals(false, pelaaja.loukkaantunut);
+        assertEquals(false, pelaaja.getLoukkaantunut());
     }
     
     

@@ -16,8 +16,8 @@ import java.util.Map;
  */
 public class Muodostelma {
 
-    Pelaaja maalivahti;
-    List<Pelaaja> avauskentallinen;
+    private Pelaaja maalivahti;
+    private List<Pelaaja> avauskentallinen;
 
     public Muodostelma() {
 

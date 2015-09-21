@@ -14,7 +14,7 @@ import java.util.Random;
  */
 public class Pelaajageneraattori {
     
-    Random arpoja;
+    private Random arpoja;
     
     public Pelaajageneraattori(Random arpoja) {
         

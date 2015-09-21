@@ -11,3 +11,5 @@
 15.9. 1,5h - Pit-raportin tutkintaa. Ottelu-luokka luotu, pahasti kesken. Ottelu-luokan testien alustusta tehty, mikä on hikistä hommaa, kun pitää luoda joukkueet melko perusteellisesti kunnon testejä varten..
 
 18.9. 3,5h - Ottelu-luokan jatkoa - lähinnä pelaajien etäisyyksiä - ja sen suunnittelua. Testit tehdyille metodeille. Hämäräperäisen vikailmoituksen tutkintaa. Vikailmoitus jäi hämäräperäiseksi.. Joukkue-luokkaan pieniä korjauksia. TiRa-kurssi kuritti harmillisen paljon tämän viikon aikaansaannoksia. Olisin halunnut saada paljon enemmän aikaan.
+
+21.9. 2,5h (luulisin.. 2h ainakin) - Ottelu-luokka sai jatkoa. Kolme uutta metodia, joista yksi arpoo uudelle pallolliselle pelaajalle vastustajan kolmesta lähimmästä vastustajasta ja kaksi muuta avustaa. Kahta jälkimmäistä tullaan käyttämään myös syötön kohteen arpomisessa. Muutama testi samaisille metodeille. Lisäksi uusi luokka - Etaisyydenhaltija -, jota käytetään apuna pelaajien järjestämisessä etäisyyden mukaan ja etäisyyden mukaan painotetussa arpomisessa.

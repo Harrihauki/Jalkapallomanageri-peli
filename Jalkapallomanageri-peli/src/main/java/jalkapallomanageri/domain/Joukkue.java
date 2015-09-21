@@ -16,9 +16,9 @@ import java.util.Map;
  */
 public abstract class Joukkue {
     
-    Map<String, Pelaaja> pelaajat;
-    String nimi;
-    Muodostelma muodostelma;
+    private Map<String, Pelaaja> pelaajat;
+    private String nimi;
+    private Muodostelma muodostelma;
     
     public Joukkue(String nimi) {
         

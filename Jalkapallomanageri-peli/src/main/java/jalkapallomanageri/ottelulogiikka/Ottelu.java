@@ -7,6 +7,8 @@ package jalkapallomanageri.ottelulogiikka;
 
 import jalkapallomanageri.domain.Joukkue;
 import jalkapallomanageri.domain.Pelaaja;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,16 +23,17 @@ public class Ottelu {
     //HUOM! Nyt ajateltuna voisi olla järkevää, että Ottelu-luokka tuntusu avauksien ja maalivahdin
     //sijaan vain molempien joukkueiden Muodostelmat. Täytyy funtsia.
     
-    Joukkue koti;
-    Joukkue vieras;
-    List<Pelaaja> kotiAvaus;
-    List<Pelaaja> vierasAvaus;
-    Pelaaja kotiMV;
-    Pelaaja vierasMV;
-    Random arpoja;
-    int vierasmaalit;
-    int kotimaalit;
-    Pelaaja pallonhaltija;
+    private Joukkue koti;
+    private Joukkue vieras;
+    private List<Pelaaja> kotiAvaus;
+    private List<Pelaaja> vierasAvaus;
+    private Pelaaja kotiMV;
+    private Pelaaja vierasMV;
+    private Random arpoja;
+    private int vierasmaalit;
+    private int kotimaalit;
+    private Pelaaja pallonhaltija;
+    private Pelaaja edellinenPallonhaltija;
     
     public Ottelu(Joukkue koti, Joukkue vieras, Random arpoja) {
         
@@ -58,6 +61,7 @@ public class Ottelu {
     
     public void setPallonhaltija(Pelaaja pelaaja) {
         
+        this.edellinenPallonhaltija = this.pallonhaltija;
         this.pallonhaltija = pelaaja;
     }
     
@@ -121,5 +125,47 @@ public class Ottelu {
         return Math.sqrt(etaisyys);
     }
     
-    
+    public Pelaaja ketaVastaan() {
+        
+        Map<Pelaaja, Double> mahdollisetVastustajat = laskeVastustajienEtaisyydet(this.pallonhaltija);
+        
+        List<Etaisyydenhaltija> vastustajatJarjestyksessa = etaisyydetJarjestyksessa(mahdollisetVastustajat);
+        
+        Pelaaja vastustaja = arvoKohde(vastustajatJarjestyksessa, 3);
+        
+        return vastustaja;
+    }
+
+    public List<Etaisyydenhaltija> etaisyydetJarjestyksessa(Map<Pelaaja, Double> jarjestettavatPelaajat) {
+        
+        List<Etaisyydenhaltija> etaisyydetJarjestyksessa = new ArrayList();
+        
+        for (Pelaaja pelaaja : jarjestettavatPelaajat.keySet()) {
+            
+            Etaisyydenhaltija haltija = new Etaisyydenhaltija(pelaaja, jarjestettavatPelaajat.get(pelaaja));
+            
+            etaisyydetJarjestyksessa.add(haltija);
+        }
+        
+        Collections.sort(etaisyydetJarjestyksessa);
+        
+        return etaisyydetJarjestyksessa;
+    }
+
+    private Pelaaja arvoKohde(List<Etaisyydenhaltija> pelaajatJarjestyksessa, int kuinkaMonesta) {
+        
+        List<Etaisyydenhaltija> arpoja = new ArrayList();
+        
+        for (int i = 0; i < kuinkaMonesta; i++) {
+            
+            for (int j = 0; j < kuinkaMonesta - i; j++) {
+                
+                arpoja.add(pelaajatJarjestyksessa.get(i));
+            }
+        }
+        
+        Collections.shuffle(arpoja);
+        
+        return arpoja.get(0).getPelaaja();
+    }
 }

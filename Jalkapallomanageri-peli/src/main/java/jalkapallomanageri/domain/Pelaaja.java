@@ -11,17 +11,17 @@ package jalkapallomanageri.domain;
  */
 public class Pelaaja {
     
-    String nimi;
-    int sijoittuminen;
-    int nopeus;
-    int maalinteko;
-    int syottaminen;
-    int puolustus;
-    int harhauttaminen;
-    int maalivahti;
-    boolean loukkaantunut;
-    int pelipaikka;
-    int sijainti;
+    private String nimi;
+    private int sijoittuminen;
+    private int nopeus;
+    private int maalinteko;
+    private int syottaminen;
+    private int puolustus;
+    private int harhauttaminen;
+    private int maalivahti;
+    private boolean loukkaantunut;
+    private int pelipaikka;
+    private int sijainti;
     
     public Pelaaja(String nimi, int sijoittuminen, int nopeus, int maalinteko, int syottaminen, int puolustus, int harhauttaminen, int maalivahti) {
         

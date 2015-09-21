@@ -10,6 +10,7 @@ import jalkapallomanageri.domain.BottiJoukkue;
 import jalkapallomanageri.domain.Joukkue;
 import jalkapallomanageri.domain.Pelaaja;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -111,6 +112,24 @@ public class OtteluTest {
     public void vastustajanEtaisyyksiaOikeaMaara() {
         
         assertEquals(10, ottelu.laskeVastustajienEtaisyydet(arsunAvaus.get(0)).size());
+    }
+    
+    @Test
+    public void vastustajatJarjestyksessaLahinOikein() {
+        
+        Map<Pelaaja, Double> vastustajienEtaisyydet = ottelu.laskeVastustajienEtaisyydet(arsunAvaus.get(0));
+        List<Etaisyydenhaltija> etaisyydetJarjestyksessa = ottelu.etaisyydetJarjestyksessa(vastustajienEtaisyydet);
+        
+        assertEquals(poolinAvaus.get(9), etaisyydetJarjestyksessa.get(0).getPelaaja());
+    }
+    
+    @Test
+    public void vastustajatJarjestyksessaKaukaisinOikein() {
+        
+        Map<Pelaaja, Double> vastustajienEtaisyydet = ottelu.laskeVastustajienEtaisyydet(arsunAvaus.get(0));
+        List<Etaisyydenhaltija> etaisyydetJarjestyksessa = ottelu.etaisyydetJarjestyksessa(vastustajienEtaisyydet);
+        
+        assertEquals(poolinAvaus.get(4), etaisyydetJarjestyksessa.get(9).getPelaaja());
     }
     
     
