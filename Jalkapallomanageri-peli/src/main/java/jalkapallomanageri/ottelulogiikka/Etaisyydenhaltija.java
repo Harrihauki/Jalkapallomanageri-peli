@@ -39,7 +39,7 @@ public class Etaisyydenhaltija implements Comparable {
             
             Etaisyydenhaltija haltija = (Etaisyydenhaltija) o;
             
-            return -this.etaisyys.compareTo(haltija.getEtaisyys());
+            return this.etaisyys.compareTo(haltija.getEtaisyys());
         }
         
         return 0;

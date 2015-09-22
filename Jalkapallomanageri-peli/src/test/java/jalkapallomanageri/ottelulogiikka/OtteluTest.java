@@ -9,6 +9,7 @@ import jalkapallomanageri.ottelulogiikka.Muodostelma;
 import jalkapallomanageri.domain.BottiJoukkue;
 import jalkapallomanageri.domain.Joukkue;
 import jalkapallomanageri.domain.Pelaaja;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -75,7 +76,7 @@ public class OtteluTest {
     @Test
     public void kahdenPelaajanEtaisyydenLaskeminenOnnistuu() {
         
-        assertEquals(2.0, ottelu.etaisyys(poolinAvaus.get(1), poolinAvaus.get(8)), 0.01);
+        assertEquals(2.0, ottelu.omanPelaajanEtaisyys(poolinAvaus.get(1), poolinAvaus.get(8)), 0.01);
     }
     
     @Test
@@ -132,7 +133,18 @@ public class OtteluTest {
         assertEquals(poolinAvaus.get(4), etaisyydetJarjestyksessa.get(9).getPelaaja());
     }
     
-    
+    @Test
+    public void vastustajaArvotaanOikein() {
+        
+        ottelu.setPallonhaltija(arsunAvaus.get(0));
+        
+        List<Pelaaja> kolmeLahinta = new ArrayList();
+        kolmeLahinta.add(poolinAvaus.get(9));
+        kolmeLahinta.add(poolinAvaus.get(8));
+        kolmeLahinta.add(poolinAvaus.get(6));
+        
+        assertTrue(kolmeLahinta.contains(ottelu.ketaVastaan()));
+    }
 
     private void alustaJoukkueet() {
         

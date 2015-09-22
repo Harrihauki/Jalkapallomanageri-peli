@@ -73,12 +73,12 @@ public class Ottelu {
         
         for (Pelaaja vertailtava : vertailtavatPelaajat) {
             
-            if (this.etaisyys(pelaaja, vertailtava) == 0.0) {
+            if (this.omanPelaajanEtaisyys(pelaaja, vertailtava) == 0.0) {
                 
                 continue;
             }
             
-            pelaajienEtaisyydet.put(vertailtava, etaisyys(pelaaja, vertailtava));
+            pelaajienEtaisyydet.put(vertailtava, omanPelaajanEtaisyys(pelaaja, vertailtava));
         }
         
         return pelaajienEtaisyydet;
@@ -92,7 +92,7 @@ public class Ottelu {
         
         for (Pelaaja vertailtava : vertailtavatPelaajat) {
             
-            pelaajienEtaisyydet.put(vertailtava, etaisyys(pelaaja, vertailtava));
+            pelaajienEtaisyydet.put(vertailtava, vastustajanEtaisyys(pelaaja, vertailtava));
         }
         
         return pelaajienEtaisyydet;
@@ -118,9 +118,16 @@ public class Ottelu {
         return this.kotiAvaus;
     }
 
-    public double etaisyys(Pelaaja pelaaja, Pelaaja vertailtava) {
+    public double omanPelaajanEtaisyys(Pelaaja pelaaja, Pelaaja vertailtava) {
         
         double etaisyys = Math.pow((pelaaja.getPelipaikka()-vertailtava.getPelipaikka()), 2) + Math.pow(pelaaja.getSijainti() - vertailtava.getSijainti(), 2);
+        
+        return Math.sqrt(etaisyys);
+    }
+    
+    public double vastustajanEtaisyys(Pelaaja pelaaja, Pelaaja vertailtava) {
+        
+        double etaisyys = Math.pow((pelaaja.getPelipaikka()- (6 - vertailtava.getPelipaikka())), 2) + Math.pow(pelaaja.getSijainti() - (6 - vertailtava.getSijainti()), 2);
         
         return Math.sqrt(etaisyys);
     }
@@ -134,6 +141,17 @@ public class Ottelu {
         Pelaaja vastustaja = arvoKohde(vastustajatJarjestyksessa, 3);
         
         return vastustaja;
+    }
+    
+    public Pelaaja kenelleSyotetaan() {
+        
+        Map<Pelaaja, Double> mahdollisetSyotonKohteet = laskeOmienEtaisyydet(this.pallonhaltija);
+        
+        List<Etaisyydenhaltija> omatJarjestyksessa = etaisyydetJarjestyksessa(mahdollisetSyotonKohteet);
+        
+        Pelaaja syotonKohde = arvoKohde(omatJarjestyksessa, 9);
+        
+        return syotonKohde;
     }
 
     public List<Etaisyydenhaltija> etaisyydetJarjestyksessa(Map<Pelaaja, Double> jarjestettavatPelaajat) {
@@ -168,4 +186,20 @@ public class Ottelu {
         
         return arpoja.get(0).getPelaaja();
     }
+    
+    public boolean onnistuukoSyotto(Pelaaja syottaja, Pelaaja puolustaja, Pelaaja kohde) {
+        
+        double taitojenSumma = syottaja.getSyottaminen() + kohde.getSijoittuminen() + puolustaja.getPuolustus() + puolustaja.getSijoittuminen() + omanPelaajanEtaisyys(syottaja, kohde);
+        double taitojenSuhde = (syottaja.getSyottaminen() + kohde.getSijoittuminen()) / taitojenSumma;
+        
+        double onnistuminen = this.arpoja.nextDouble();
+        
+        if (taitojenSuhde >= onnistuminen) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    
 }
