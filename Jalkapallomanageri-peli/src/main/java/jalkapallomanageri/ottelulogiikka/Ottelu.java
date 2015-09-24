@@ -194,7 +194,57 @@ public class Ottelu {
         
         double onnistuminen = this.arpoja.nextDouble();
         
-        if (taitojenSuhde >= onnistuminen) {
+        if (taitojenSuhde > onnistuminen) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean paaseekoMaalipaikkaanSyotosta(Pelaaja puolustaja) {
+        
+        double tekijoidenSumma = this.edellinenPallonhaltija.getSyottaminen() * (1 + this.edellinenPallonhaltija.getPelipaikka()/10) + omanPelaajanEtaisyys(this.pallonhaltija, this.edellinenPallonhaltija) + 30 + puolustaja.getSijoittuminen();
+        double suhdeluku = (this.edellinenPallonhaltija.getSyottaminen() * (1 + this.edellinenPallonhaltija.getPelipaikka()/10) + omanPelaajanEtaisyys(this.pallonhaltija, this.edellinenPallonhaltija)) / tekijoidenSumma;
+        
+        double onnistuminen = this.arpoja.nextDouble();
+        
+        if (suhdeluku > onnistuminen) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean tuleekoMaali() {
+        
+        Pelaaja maalivahti = null;
+        
+        if (this.kotiAvaus.contains(this.pallonhaltija)) {
+            maalivahti = this.vierasMV;
+        } else {
+            maalivahti = this.kotiMV;
+        }
+        
+        double taitojenSumma = this.pallonhaltija.getMaalinteko() + this.pallonhaltija.getHarhauttaminen() + maalivahti.getSijoittuminen() + maalivahti.getMaalivahti();
+        double taitojenSuhde = (this.pallonhaltija.getMaalinteko() + this.pallonhaltija.getHarhauttaminen()) / taitojenSumma;
+        
+        double onnistuminen = this.arpoja.nextDouble();
+        
+        if (taitojenSuhde > onnistuminen) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public boolean tuleekoVastahyokkays() {
+        
+        double summa = this.pallonhaltija.getNopeus() / this.edellinenPallonhaltija.getPelipaikka() + 5;
+        double suhdeluku = (this.pallonhaltija.getNopeus() / this.edellinenPallonhaltija.getPelipaikka()) / summa;
+        
+        double onnistuminen = this.arpoja.nextDouble();
+        
+        if (suhdeluku > onnistuminen) {
             return true;
         }
         

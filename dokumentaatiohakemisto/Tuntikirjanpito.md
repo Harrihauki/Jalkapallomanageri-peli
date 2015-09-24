@@ -15,3 +15,5 @@
 21.9. 2,5h (luulisin.. 2h ainakin) - Ottelu-luokka sai jatkoa. Kolme uutta metodia, joista yksi arpoo uudelle pallolliselle pelaajalle vastustajan kolmesta lähimmästä vastustajasta ja kaksi muuta avustaa. Kahta jälkimmäistä tullaan käyttämään myös syötön kohteen arpomisessa. Muutama testi samaisille metodeille. Lisäksi uusi luokka - Etaisyydenhaltija -, jota käytetään apuna pelaajien järjestämisessä etäisyyden mukaan ja etäisyyden mukaan painotetussa arpomisessa.
 
 22.9. 1,5h - Etäisyyden laskemisessa havaitsin ongelman koskien vertaamista vastustajan pelaajien kanssa: vastustajan kokoonpanohan on tietysti peilattu x- ja y-akselien suhteen. Korjattu lisäämällä uusi metodi. Laajennettu luokkaa määrittämään syötön kohde ja metodi, joka arpoo painotetusti syötön onnistumisen. Täytyy vielä miettiä, olenko tuohon tyytyväinen, vai pitääkö kaavaa muuttaa. Testejä korjattu ja täydennetty.
+
+24.9. 1,5h - Metodeja lisätty Ottelu-luokkaan koskien hyökkäysten etenemistä syöttöjen kautta ja sitä, mitä tapahtuu pallonmenetyksen yhteydessä.
