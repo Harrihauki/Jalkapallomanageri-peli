@@ -9,38 +9,58 @@ import jalkapallomanageri.domain.Pelaaja;
 import java.util.Random;
 
 /**
- *
- * @author lallimyl
+ * Luo satunnaisesti pelaajat joukkueita varten.
  */
 public class Pelaajageneraattori {
-    
+
     private Random arpoja;
-    
+
+    /**
+     *
+     * @param arpoja
+     */
     public Pelaajageneraattori(Random arpoja) {
-        
+
         this.arpoja = arpoja;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public Pelaaja luoPelaaja() {
-        
+
         int luodaankoErikoispelaaja = this.arpoja.nextInt(100);
-        
+
         if (luodaankoErikoispelaaja == 0) {
-            
-            Pelaaja litmanen = new Pelaaja("Jari Litmanen", 10, 6, 10, 10, 4, 10, 3);
-            
-            return litmanen;
+
+            int kumpiPelaaja = this.arpoja.nextInt(2);
+
+            if (kumpiPelaaja == 1) {
+                Pelaaja litmanen = new Pelaaja("Jari Litmanen", 10, 6, 10, 10, 4, 10, 3);
+
+                return litmanen;
+            } else {
+                Pelaaja oravainen = new Pelaaja("Pexi Oravainen", 9, 8, 8, 9, 6, 9, 1);
+                
+                return oravainen;
+            }
+
         }
-        
+
         Pelaaja pelaaja = new Pelaaja("" + this.arpoja.nextInt(1000), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo());
-        
+
         return pelaaja;
     }
-    
+
+    /**
+     *
+     * @return
+     */
     public int arvoArvo() {
-        
+
         int taso = this.arpoja.nextInt(111);
-        
+
         if (taso < 10) {
             return 1;
         } else if (taso < 21) {
@@ -63,5 +83,5 @@ public class Pelaajageneraattori {
             return 10;
         }
     }
-    
+
 }

@@ -15,8 +15,7 @@ import java.util.Map;
 import java.util.Random;
 
 /**
- *
- * @author lallimyl
+ * Luokka sisältää ottelumekaniikan ja ylläpitää tiedon ottelun tilanteesta.
  */
 public class Ottelu {
     
@@ -35,6 +34,12 @@ public class Ottelu {
     private Pelaaja pallonhaltija;
     private Pelaaja edellinenPallonhaltija;
     
+    /**
+     *
+     * @param koti
+     * @param vieras
+     * @param arpoja
+     */
     public Ottelu(Joukkue koti, Joukkue vieras, Random arpoja) {
         
         this.koti = koti;
@@ -49,22 +54,69 @@ public class Ottelu {
         this.pallonhaltija = kotiAvaus.get(0);
     }
     
+    /**
+     *
+     * @return
+     */
     public Joukkue getKoti() {
         
         return this.koti;
     }
     
+    /**
+     *
+     */
+    public void lisaaMaali() {
+        
+        if (this.kotiAvaus.contains(this.pallonhaltija)) {
+            this.kotimaalit = this.kotimaalit + 1;
+        } else {
+            this.vierasmaalit = this.vierasmaalit + 1;
+        }
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public int getKotimaalit() {
+        
+        return this.kotimaalit;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public int getVierasmaalit() {
+        
+        return this.vierasmaalit;
+    }
+    
+    /**
+     *
+     * @return
+     */
     public Joukkue getVieras() {
         
         return this.vieras;
     }
     
+    /**
+     *
+     * @param pelaaja
+     */
     public void setPallonhaltija(Pelaaja pelaaja) {
         
         this.edellinenPallonhaltija = this.pallonhaltija;
         this.pallonhaltija = pelaaja;
     }
     
+    /**
+     *
+     * @param pelaaja
+     * @return
+     */
     public Map<Pelaaja, Double> laskeOmienEtaisyydet(Pelaaja pelaaja) {
         
         List<Pelaaja> vertailtavatPelaajat = this.pallollisenJoukkueenPelaajat(pelaaja);
@@ -84,6 +136,11 @@ public class Ottelu {
         return pelaajienEtaisyydet;
     }
     
+    /**
+     *
+     * @param pelaaja
+     * @return
+     */
     public Map<Pelaaja, Double> laskeVastustajienEtaisyydet(Pelaaja pelaaja) {
         
         List<Pelaaja> vertailtavatPelaajat = this.pallottomanJoukkueenPelaajat(pelaaja);
@@ -98,6 +155,11 @@ public class Ottelu {
         return pelaajienEtaisyydet;
     }
 
+    /**
+     *
+     * @param pallollinenPelaaja
+     * @return
+     */
     public List<Pelaaja> pallollisenJoukkueenPelaajat(Pelaaja pallollinenPelaaja) {
         
         if (this.kotiAvaus.contains(pallollinenPelaaja)) {
@@ -108,6 +170,11 @@ public class Ottelu {
         return this.vierasAvaus;
     }
     
+    /**
+     *
+     * @param pallollinenPelaaja
+     * @return
+     */
     public List<Pelaaja> pallottomanJoukkueenPelaajat(Pelaaja pallollinenPelaaja) {
         
         if (this.kotiAvaus.contains(pallollinenPelaaja)) {
@@ -118,6 +185,12 @@ public class Ottelu {
         return this.kotiAvaus;
     }
 
+    /**
+     *
+     * @param pelaaja
+     * @param vertailtava
+     * @return
+     */
     public double omanPelaajanEtaisyys(Pelaaja pelaaja, Pelaaja vertailtava) {
         
         double etaisyys = Math.pow((pelaaja.getPelipaikka()-vertailtava.getPelipaikka()), 2) + Math.pow(pelaaja.getSijainti() - vertailtava.getSijainti(), 2);
@@ -125,6 +198,12 @@ public class Ottelu {
         return Math.sqrt(etaisyys);
     }
     
+    /**
+     *
+     * @param pelaaja
+     * @param vertailtava
+     * @return
+     */
     public double vastustajanEtaisyys(Pelaaja pelaaja, Pelaaja vertailtava) {
         
         double etaisyys = Math.pow((pelaaja.getPelipaikka()- (6 - vertailtava.getPelipaikka())), 2) + Math.pow(pelaaja.getSijainti() - (6 - vertailtava.getSijainti()), 2);
@@ -132,6 +211,10 @@ public class Ottelu {
         return Math.sqrt(etaisyys);
     }
     
+    /**
+     *
+     * @return
+     */
     public Pelaaja ketaVastaan() {
         
         Map<Pelaaja, Double> mahdollisetVastustajat = laskeVastustajienEtaisyydet(this.pallonhaltija);
@@ -143,6 +226,10 @@ public class Ottelu {
         return vastustaja;
     }
     
+    /**
+     *
+     * @return
+     */
     public Pelaaja kenelleSyotetaan() {
         
         Map<Pelaaja, Double> mahdollisetSyotonKohteet = laskeOmienEtaisyydet(this.pallonhaltija);
@@ -154,6 +241,11 @@ public class Ottelu {
         return syotonKohde;
     }
 
+    /**
+     *
+     * @param jarjestettavatPelaajat
+     * @return
+     */
     public List<Etaisyydenhaltija> etaisyydetJarjestyksessa(Map<Pelaaja, Double> jarjestettavatPelaajat) {
         
         List<Etaisyydenhaltija> etaisyydetJarjestyksessa = new ArrayList();
@@ -187,6 +279,13 @@ public class Ottelu {
         return arpoja.get(0).getPelaaja();
     }
     
+    /**
+     *
+     * @param syottaja
+     * @param puolustaja
+     * @param kohde
+     * @return
+     */
     public boolean onnistuukoSyotto(Pelaaja syottaja, Pelaaja puolustaja, Pelaaja kohde) {
         
         double taitojenSumma = syottaja.getSyottaminen() + kohde.getSijoittuminen() + puolustaja.getPuolustus() + puolustaja.getSijoittuminen() + omanPelaajanEtaisyys(syottaja, kohde);
@@ -201,6 +300,11 @@ public class Ottelu {
         return false;
     }
     
+    /**
+     *
+     * @param puolustaja
+     * @return
+     */
     public boolean paaseekoMaalipaikkaanSyotosta(Pelaaja puolustaja) {
         
         double tekijoidenSumma = this.edellinenPallonhaltija.getSyottaminen() * (1 + this.edellinenPallonhaltija.getPelipaikka()/10) + omanPelaajanEtaisyys(this.pallonhaltija, this.edellinenPallonhaltija) + 30 + puolustaja.getSijoittuminen();
@@ -215,9 +319,13 @@ public class Ottelu {
         return false;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean tuleekoMaali() {
         
-        Pelaaja maalivahti = null;
+        Pelaaja maalivahti;
         
         if (this.kotiAvaus.contains(this.pallonhaltija)) {
             maalivahti = this.vierasMV;
@@ -237,10 +345,70 @@ public class Ottelu {
         return false;
     }
     
+    /**
+     *
+     * @return
+     */
     public boolean tuleekoVastahyokkays() {
         
         double summa = this.pallonhaltija.getNopeus() / this.edellinenPallonhaltija.getPelipaikka() + 5;
         double suhdeluku = (this.pallonhaltija.getNopeus() / this.edellinenPallonhaltija.getPelipaikka()) / summa;
+        
+        double onnistuminen = this.arpoja.nextDouble();
+        
+        if (suhdeluku > onnistuminen) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    public boolean lahteekoHarhauttamaan() {
+        
+        int tekijoidenSumma = this.pallonhaltija.getPelipaikka() + 10;
+        double suhdeluku = this.pallonhaltija.getPelipaikka() / tekijoidenSumma;
+        
+        double paatos = this.arpoja.nextDouble();
+        
+        if (suhdeluku > paatos) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     *
+     * @param puolustaja
+     * @return
+     */
+    public boolean onnistuukoHarhautus(Pelaaja puolustaja) {
+        
+        double taitojenSumma = this.pallonhaltija.getHarhauttaminen() + this.pallonhaltija.getNopeus() + puolustaja.getNopeus() + puolustaja.getPuolustus();
+        double suhdeluku = (this.pallonhaltija.getHarhauttaminen() + this.pallonhaltija.getNopeus()) / taitojenSumma;
+        
+        double onnistuminen = this.arpoja.nextDouble();
+        
+        if (suhdeluku > onnistuminen) {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    /**
+     *
+     * @param puolustaja
+     * @return
+     */
+    public boolean paaseekoMaalipaikkaanHarhautuksesta(Pelaaja puolustaja) {
+        
+        double tekijoidenSumma = (this.pallonhaltija.getPelipaikka() / 2) + vastustajanEtaisyys(this.pallonhaltija, puolustaja) + 5;
+        double suhdeluku = ((this.pallonhaltija.getPelipaikka() / 2) + vastustajanEtaisyys(this.pallonhaltija, puolustaja)) / tekijoidenSumma;
         
         double onnistuminen = this.arpoja.nextDouble();
         

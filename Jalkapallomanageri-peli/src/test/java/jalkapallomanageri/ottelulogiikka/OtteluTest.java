@@ -145,6 +145,42 @@ public class OtteluTest {
         
         assertTrue(kolmeLahinta.contains(ottelu.ketaVastaan()));
     }
+    
+    @Test
+    public void lisaaMaaliToimiiVierasjoukkueelle() {
+        
+        ottelu.setPallonhaltija(arsunAvaus.get(0));
+        ottelu.lisaaMaali();
+        
+        assertEquals(1, ottelu.getVierasmaalit());
+    }
+    
+    @Test
+    public void lisaaMaaliToimiiKotijoukkueelle() {
+        
+        ottelu.setPallonhaltija(poolinAvaus.get(0));
+        ottelu.lisaaMaali();
+        
+        assertEquals(1, ottelu.getKotimaalit());
+    }
+    
+    @Test
+    public void maaliLisataanVainVierasjoukkueelle() {
+        
+        ottelu.setPallonhaltija(arsunAvaus.get(0));
+        ottelu.lisaaMaali();
+        
+        assertEquals(0, ottelu.getKotimaalit());
+    }
+    
+    @Test
+    public void maaliLisataanVainKotijoukkueelle() {
+        
+        ottelu.setPallonhaltija(poolinAvaus.get(0));
+        ottelu.lisaaMaali();
+        
+        assertEquals(0, ottelu.getVierasmaalit());
+    }
 
     private void alustaJoukkueet() {
         

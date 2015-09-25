@@ -11,14 +11,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author lallimyl
+ * Luokka tietää joukkueen avauskokoonpanon ja sen kautta voi muuttaa pelaajan
+ * pelipaikkaa
  */
 public class Muodostelma {
 
     private Pelaaja maalivahti;
     private List<Pelaaja> avauskentallinen;
 
+    /**
+     *
+     */
     public Muodostelma() {
 
         this.avauskentallinen = new ArrayList<>();
@@ -96,7 +99,14 @@ public class Muodostelma {
 //
 //        return asetettavanPelaajanNimi;
 //    }
-    public boolean pelaajaOnJoAsetettu(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
+
+    /**
+     *
+     * @param asetettavanPelaajanNimi
+     * @param pelaajat
+     * @return
+     */
+        public boolean pelaajaOnJoAsetettu(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
 
         if (this.avauskentallinen.isEmpty()) {
 
@@ -185,7 +195,13 @@ public class Muodostelma {
 //        
 //        return sijainti;
 //    }
-    public void setMaalivahti(String nimi, Map<String, Pelaaja> pelaajat) {
+
+    /**
+     *
+     * @param nimi
+     * @param pelaajat
+     */
+        public void setMaalivahti(String nimi, Map<String, Pelaaja> pelaajat) {
 
         this.maalivahti = pelaajat.get(nimi);
 
@@ -203,7 +219,14 @@ public class Muodostelma {
 //
 //        return false;
 //    }
-    public boolean pelipaikkaOnVarattu(int pelipaikka, int sijainti) {
+
+    /**
+     *
+     * @param pelipaikka
+     * @param sijainti
+     * @return
+     */
+        public boolean pelipaikkaOnVarattu(int pelipaikka, int sijainti) {
 
         for (Pelaaja pelaaja : this.avauskentallinen) {
 
@@ -230,7 +253,14 @@ public class Muodostelma {
 //
 //        return false;
 //    }
-    public boolean pelaajaaEiOle(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
+
+    /**
+     *
+     * @param asetettavanPelaajanNimi
+     * @param pelaajat
+     * @return
+     */
+        public boolean pelaajaaEiOle(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
 
         if (pelaajat.containsKey(asetettavanPelaajanNimi)) {
 
@@ -240,6 +270,13 @@ public class Muodostelma {
         return true;
     }
 
+    /**
+     *
+     * @param asetettavanPelaajanNimi
+     * @param pelipaikka
+     * @param sijainti
+     * @param pelaajat
+     */
     public void lisaaPelaajaPaikalleen(String asetettavanPelaajanNimi, int pelipaikka, int sijainti, Map<String, Pelaaja> pelaajat) {
 
         Pelaaja pelaaja = pelaajat.get(asetettavanPelaajanNimi);
@@ -252,16 +289,27 @@ public class Muodostelma {
         System.out.println("");
     }
 
+    /**
+     *
+     * @return
+     */
     public List<Pelaaja> getAvauskentallinen() {
 
         return this.avauskentallinen;
     }
 
+    /**
+     *
+     * @return
+     */
     public Pelaaja getMaalivahti() {
 
         return this.maalivahti;
     }
 
+    /**
+     *
+     */
     public void alustaMuodostelma() {
 
         this.avauskentallinen.clear();

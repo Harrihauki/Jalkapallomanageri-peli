@@ -17,3 +17,5 @@
 22.9. 1,5h - Etäisyyden laskemisessa havaitsin ongelman koskien vertaamista vastustajan pelaajien kanssa: vastustajan kokoonpanohan on tietysti peilattu x- ja y-akselien suhteen. Korjattu lisäämällä uusi metodi. Laajennettu luokkaa määrittämään syötön kohde ja metodi, joka arpoo painotetusti syötön onnistumisen. Täytyy vielä miettiä, olenko tuohon tyytyväinen, vai pitääkö kaavaa muuttaa. Testejä korjattu ja täydennetty.
 
 24.9. 1,5h - Metodeja lisätty Ottelu-luokkaan koskien hyökkäysten etenemistä syöttöjen kautta ja sitä, mitä tapahtuu pallonmenetyksen yhteydessä.
+
+25.9. 3,5h - Ottelu-luokan tärkeimmät metodit viimeistelty. Testejä lisätty. Sarja-luokka luotu. Pelaajageneroinnin ongelmia korjattu. Testien rivikattavuus ja mutaatiot laahaavat, koska en ole keksinyt sopivaa keinoa sattumaan perustuvien, joskin luonteeltaan melko triviaalien metodien testaamiseen.

@@ -6,11 +6,15 @@
 package jalkapallomanageri.domain;
 
 /**
- *
- * @author lallimyl
+ *Luokka määrittelee bottijoukkueiden toimintaa
+ * 
  */
 public class BottiJoukkue extends Joukkue {
 
+    /**
+     *
+     * @param nimi
+     */
     public BottiJoukkue(String nimi) {
         super(nimi);
     }

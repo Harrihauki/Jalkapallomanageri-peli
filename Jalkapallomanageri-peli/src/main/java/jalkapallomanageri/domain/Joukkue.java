@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package jalkapallomanageri.domain;
 
@@ -11,8 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- *
- * @author lallimyl
+ * Luokka määrittelee joukkueiden yleisen toiminnan, kuten pelaajien hallinnan,
+ * riippumatta siitä, onko joukkue botti vai käyttäjän joukkue
+ * 
  */
 public abstract class Joukkue {
     
@@ -20,6 +19,10 @@ public abstract class Joukkue {
     private String nimi;
     private Muodostelma muodostelma;
     
+    /**
+     *
+     * @param nimi
+     */
     public Joukkue(String nimi) {
         
         this.nimi = nimi;
@@ -27,26 +30,46 @@ public abstract class Joukkue {
         this.muodostelma = new Muodostelma();
     }
     
+    /**
+     *
+     * @return
+     */
     public String getNimi() {
         
         return this.nimi;
     }
     
+    /**
+     *
+     * @param generaattori
+     */
     public void generoiPelaajat(Pelaajageneraattori generaattori) {
         
         for (int i = 0; i < 16; i++) {
             
             Pelaaja pelaaja = generaattori.luoPelaaja();
             
+            if (pelaajat.containsKey(pelaaja.getNimi())) {
+                i--;
+            }
+            
             this.pelaajat.put(pelaaja.getNimi(), pelaaja);
         }
     }
     
+    /**
+     *
+     * @return
+     */
     public Map<String, Pelaaja> getPelaajat() {
         
         return this.pelaajat;
     }
     
+    /**
+     *
+     * @return
+     */
     public Muodostelma getMuodostelma() {
         
         return this.muodostelma;
