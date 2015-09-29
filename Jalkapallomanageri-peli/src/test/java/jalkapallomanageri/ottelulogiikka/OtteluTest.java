@@ -181,6 +181,18 @@ public class OtteluTest {
         
         assertEquals(0, ottelu.getVierasmaalit());
     }
+    
+    @Test
+    public void palauttaaKotijoukkueenOikein() {
+        
+        assertEquals(liverpool, ottelu.getKoti());
+    }
+    
+    @Test
+    public void palauttaaVierasjoukkueenOikein() {
+        
+        assertEquals(arsenal, ottelu.getVieras());
+    }
 
     private void alustaJoukkueet() {
         

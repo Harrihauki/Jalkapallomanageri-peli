@@ -19,3 +19,5 @@
 24.9. 1,5h - Metodeja lisätty Ottelu-luokkaan koskien hyökkäysten etenemistä syöttöjen kautta ja sitä, mitä tapahtuu pallonmenetyksen yhteydessä.
 
 25.9. 3,5h - Ottelu-luokan tärkeimmät metodit viimeistelty. Testejä lisätty. Sarja-luokka luotu. Pelaajageneroinnin ongelmia korjattu. Testien rivikattavuus ja mutaatiot laahaavat, koska en ole keksinyt sopivaa keinoa sattumaan perustuvien, joskin luonteeltaan melko triviaalien metodien testaamiseen.
+
+29.9. 2h - Pit-testien puintia ja testien lisäämistä ja parantelua. Pelaajien keskinäiseen vertailuun tarkoitetut luokat luotu. Bottijoukkue-luokkaan alettu tehdä metodia pelaajien muodostelman asettamista varten.

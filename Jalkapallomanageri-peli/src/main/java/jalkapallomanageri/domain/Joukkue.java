@@ -45,7 +45,7 @@ public abstract class Joukkue {
      */
     public void generoiPelaajat(Pelaajageneraattori generaattori) {
         
-        for (int i = 0; i < 16; i++) {
+        for (int i = 0; i < 18; i++) {
             
             Pelaaja pelaaja = generaattori.luoPelaaja();
             
@@ -73,6 +73,11 @@ public abstract class Joukkue {
     public Muodostelma getMuodostelma() {
         
         return this.muodostelma;
+    }
+    
+    public void setMuodostelma() {
+        
+        
     }
     
 }

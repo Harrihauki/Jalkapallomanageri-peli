@@ -57,6 +57,6 @@ public class JoukkueTest {
         
         joukkue.generoiPelaajat(generaattori);
         
-        assertTrue(joukkue.getPelaajat().size() == 16);
+        assertTrue(joukkue.getPelaajat().size() == 18);
     }
 }

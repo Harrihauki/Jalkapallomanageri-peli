@@ -105,6 +105,12 @@ public class MuodostelmaTest {
     }
     
     @Test
+    public void varaamatonPelipaikkaTunnistetaan() {
+        
+        assertEquals(false, muodostelma.pelipaikkaOnVarattu(3, 3));
+    }
+    
+    @Test
     public void joukkueeseenKuulumatonPelaajaTunnistetaan() {
         
         assertEquals(true, muodostelma.pelaajaaEiOle(nimi, pelaajat));
@@ -185,5 +191,13 @@ public class MuodostelmaTest {
         muodostelma.alustaMuodostelma();
         
         assertEquals(null, muodostelma.getMaalivahti());
+    }
+    
+    @Test
+    public void pelaajanOlemassaoloTunnistetaan() {
+        
+        pelaajat.put(nimi, seppo);
+        
+        assertEquals(false, muodostelma.pelaajaaEiOle(nimi, pelaajat));
     }
 }
