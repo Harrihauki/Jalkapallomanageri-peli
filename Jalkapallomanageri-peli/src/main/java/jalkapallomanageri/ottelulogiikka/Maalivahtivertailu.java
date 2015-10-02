@@ -8,7 +8,7 @@ package jalkapallomanageri.ottelulogiikka;
 import jalkapallomanageri.domain.Pelaaja;
 
 /**
- *
+ * Vertailee joukkueen pelaajia maalivahdille merkitsevien taitojen keskiarvon avulla.
  * @author lallimyl
  */
 public class Maalivahtivertailu implements Comparable {
@@ -39,7 +39,7 @@ public class Maalivahtivertailu implements Comparable {
             
             Maalivahtivertailu mv = (Maalivahtivertailu) o;
             
-            return this.merkitsevienTaitojenKeskiarvo.compareTo(mv.getMerkitsevienTaitojenKeskiarvo());
+            return -this.merkitsevienTaitojenKeskiarvo.compareTo(mv.getMerkitsevienTaitojenKeskiarvo());
         }
         
         return 0;

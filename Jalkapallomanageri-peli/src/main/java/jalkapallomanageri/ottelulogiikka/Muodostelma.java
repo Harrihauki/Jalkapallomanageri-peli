@@ -118,14 +118,10 @@ public class Muodostelma {
 
         if (this.avauskentallinen.contains(pelaajat.get(asetettavanPelaajanNimi))) {
 
-            System.out.println("Pelaaja on jo asetettu.");
-
             return true;
         } else if (this.maalivahti != null) {
             
             if (this.maalivahti.equals(pelaajat.get(asetettavanPelaajanNimi))) {
-
-                System.out.println("Pelaaja on jo asetettu.");
 
                 return true;
 
@@ -204,9 +200,6 @@ public class Muodostelma {
         public void setMaalivahti(String nimi, Map<String, Pelaaja> pelaajat) {
 
         this.maalivahti = pelaajat.get(nimi);
-
-        System.out.println("Maalivahti asetettu.");
-        System.out.println("");
     }
 
 //    private boolean sijaintiaEiOle(int sijainti) {
@@ -284,9 +277,6 @@ public class Muodostelma {
         this.avauskentallinen.add(pelaaja);
         pelaaja.setPelipaikka(pelipaikka);
         pelaaja.setSijainti(sijainti);
-
-        System.out.println("Pelaaja asetettu");
-        System.out.println("");
     }
 
     /**

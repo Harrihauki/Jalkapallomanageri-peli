@@ -120,7 +120,7 @@ public class Sarja {
         for (int i = 0; i < this.joukkueet.size() / 2; i++) {
             
             ottelut.add(new Ottelu(this.joukkueet.get(seuraavanKotiJoukkueenIndeksi), this.joukkueet.get((seuraavanKotiJoukkueenIndeksi+this.moneskoKierros) % this.joukkueet.size()), this.arpoja));
-            seuraavanKotiJoukkueenIndeksi = (seuraavanKotiJoukkueenIndeksi + this.moneskoKierros + 1) % this.joukkueet.size();
+            seuraavanKotiJoukkueenIndeksi = (seuraavanKotiJoukkueenIndeksi + this.moneskoKierros*2) % this.joukkueet.size();
         }
         
         return ottelut;

@@ -56,7 +56,7 @@ public class Ottelu {
     
     /**
      *
-     * @return
+     * @return 
      */
     public Joukkue getKoti() {
         
@@ -64,7 +64,7 @@ public class Ottelu {
     }
     
     /**
-     *
+     * Lisaa maalintehneelle joukkueelle maalin
      */
     public void lisaaMaali() {
         
@@ -103,8 +103,8 @@ public class Ottelu {
     }
     
     /**
-     *
-     * @param pelaaja
+     * Asettaa muuttujaan pelaajan, jolla tällä hetkellä on pallo
+     * @param pelaaja syötön vastaanottanut tai pallon riistänyt pelaaja
      */
     public void setPallonhaltija(Pelaaja pelaaja) {
         
@@ -113,9 +113,9 @@ public class Ottelu {
     }
     
     /**
-     *
-     * @param pelaaja
-     * @return
+     * Laskee omien pelaajien etäisyydet pelaajasta
+     * @param pelaaja 
+     * @return Map avaimena pelaaja, arvona pelaajan etäisyys vertailtavasta pelaajasta
      */
     public Map<Pelaaja, Double> laskeOmienEtaisyydet(Pelaaja pelaaja) {
         

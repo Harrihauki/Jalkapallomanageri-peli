@@ -43,12 +43,12 @@
         <targetClasses>
             <param>jalkapallomanageri.domain.*</param>
             <param>jalkapallomanageri.ottelulogiikka.*</param>
-            <param>jalkapallomanageri.pelaajaGeneraattori.*</param>
+            <param>jalkapallomanageri.sarja.*</param>
         </targetClasses>
         <targetTests>
             <param>jalkapallomanageri.domain.*</param>
             <param>jalkapallomanageri.ottelulogiikka.*</param>
-            <param>jalkapallomanageri.pelaajaGeneraattori.*</param>
+            <param>jalkapallomanageri.sarja.*</param>
         </targetTests>
     </configuration>
 </plugin>

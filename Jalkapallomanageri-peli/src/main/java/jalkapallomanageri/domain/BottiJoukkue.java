@@ -12,10 +12,11 @@ import jalkapallomanageri.ottelulogiikka.Puolustajavertailu;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
- *Luokka määrittelee bottijoukkueiden toimintaa
- * 
+ * Luokka määrittelee bottijoukkueiden toimintaa
+ *
  */
 public class BottiJoukkue extends Joukkue {
 
@@ -26,76 +27,244 @@ public class BottiJoukkue extends Joukkue {
     public BottiJoukkue(String nimi) {
         super(nimi);
     }
-    
+
     @Override
     public void setMuodostelma() {
         
+        super.getMuodostelma().alustaMuodostelma();
+
         List<Maalivahtivertailu> maalivahdit = this.maalivahtienVertailu();
         List<Puolustajavertailu> puolustajat = this.puolustajienVertailu();
         List<Keskikenttavertailu> keskikenttapelaajat = this.keskikenttaVertailu();
         List<Hyokkaajavertailu> hyokkaajat = this.hyokkaajienVertailu();
-        
-        
+
+        int puolustajia = 0;
+        int keskikenttapelaajia = 0;
+        int hyokkaajia = 0;
+        Random arpoja = new Random();
+
+        this.lisaaMaalivahti(maalivahdit);
+
+        while (puolustajia + keskikenttapelaajia + hyokkaajia < 7) {
+
+            int pelipaikka = arpoja.nextInt(3);
+
+            if (pelipaikka == 0 && puolustajia < 3) {
+
+                this.lisaaPuolustaja(puolustajat, arpoja);
+                puolustajia++;
+            } else if (pelipaikka == 1 && keskikenttapelaajia < 3) {
+
+                this.lisaaKeskikenttapelaaja(keskikenttapelaajat, arpoja);
+                keskikenttapelaajia++;
+            } else if (pelipaikka == 2 && hyokkaajia < 1) {
+
+                this.lisaaHyokkaaja(hyokkaajat, arpoja);
+                hyokkaajia++;
+            }
+        }
+
+        while (puolustajia + keskikenttapelaajia + hyokkaajia < 10) {
+
+            int pelipaikka = arpoja.nextInt(3);
+
+            if (pelipaikka == 0 && puolustajia < 5) {
+
+                this.lisaaPuolustaja(puolustajat, arpoja);
+                puolustajia++;
+            } else if (pelipaikka == 1 && keskikenttapelaajia < 5) {
+
+                this.lisaaKeskikenttapelaaja(keskikenttapelaajat, arpoja);
+                keskikenttapelaajia++;
+            } else if (pelipaikka == 2) {
+
+                this.lisaaHyokkaaja(hyokkaajat, arpoja);
+                hyokkaajia++;
+            }
+        }
+
     }
 
     private List<Maalivahtivertailu> maalivahtienVertailu() {
-        
+
         List<Maalivahtivertailu> vertailu = new ArrayList();
-        
+
         for (Pelaaja pelaaja : super.getPelaajat().values()) {
-            
+
             Maalivahtivertailu maalivahti = new Maalivahtivertailu(pelaaja);
             vertailu.add(maalivahti);
         }
-        
+
         Collections.sort(vertailu);
-        
+
         return vertailu;
     }
 
     private List<Puolustajavertailu> puolustajienVertailu() {
-        
+
         List<Puolustajavertailu> vertailu = new ArrayList();
-        
+
         for (Pelaaja pelaaja : super.getPelaajat().values()) {
-            
+
             Puolustajavertailu puolustaja = new Puolustajavertailu(pelaaja);
             vertailu.add(puolustaja);
         }
-        
+
         Collections.sort(vertailu);
-        
+
         return vertailu;
     }
 
     private List<Keskikenttavertailu> keskikenttaVertailu() {
-        
+
         List<Keskikenttavertailu> vertailu = new ArrayList();
-        
+
         for (Pelaaja pelaaja : super.getPelaajat().values()) {
-            
+
             Keskikenttavertailu keskikentta = new Keskikenttavertailu(pelaaja);
             vertailu.add(keskikentta);
         }
-        
+
         Collections.sort(vertailu);
-        
+
         return vertailu;
     }
 
     private List<Hyokkaajavertailu> hyokkaajienVertailu() {
-        
+
         List<Hyokkaajavertailu> vertailu = new ArrayList();
-        
+
         for (Pelaaja pelaaja : super.getPelaajat().values()) {
-            
+
             Hyokkaajavertailu hyokkaaja = new Hyokkaajavertailu(pelaaja);
             vertailu.add(hyokkaaja);
         }
-        
+
         Collections.sort(vertailu);
-        
+
         return vertailu;
     }
-    
+
+    private void lisaaPuolustaja(List<Puolustajavertailu> puolustajat, Random arpoja) {
+
+        int kuka = 0;
+
+        while (true) {
+
+            Pelaaja pelaaja = puolustajat.get(kuka).getPelaaja();
+
+            if (super.getMuodostelma().pelaajaOnJoAsetettu(pelaaja.getNimi(), super.getPelaajat())) {
+                kuka++;
+                continue;
+            } else if (pelaaja.getLoukkaantunut()) {
+                kuka++;
+                continue;
+            }
+
+            while (true) {
+
+                int sijainti = arpoja.nextInt(5) + 1;
+
+                if (super.getMuodostelma().pelipaikkaOnVarattu(1, sijainti)) {
+                    continue;
+                }
+
+                super.getMuodostelma().lisaaPelaajaPaikalleen(pelaaja.getNimi(), 1, sijainti, super.getPelaajat());
+                break;
+            }
+
+            break;
+        }
+    }
+
+    private void lisaaKeskikenttapelaaja(List<Keskikenttavertailu> keskikenttapelaajat, Random arpoja) {
+
+        int kuka = 0;
+
+        while (true) {
+
+            Pelaaja pelaaja = keskikenttapelaajat.get(kuka).getPelaaja();
+
+            if (super.getMuodostelma().pelaajaOnJoAsetettu(pelaaja.getNimi(), super.getPelaajat())) {
+                kuka++;
+                continue;
+            } else if (pelaaja.getLoukkaantunut()) {
+                kuka++;
+                continue;
+            }
+
+            int pelipaikka;
+
+            if ((pelaaja.getHarhauttaminen() + pelaaja.getSyottaminen()) - pelaaja.getPuolustus() - pelaaja.getSijoittuminen() > 2) {
+                pelipaikka = 4;
+            } else if ((pelaaja.getHarhauttaminen() + pelaaja.getSyottaminen()) - pelaaja.getPuolustus() - pelaaja.getSijoittuminen() < -2) {
+                pelipaikka = 2;
+            } else {
+                pelipaikka = 3;
+            }
+
+            while (true) {
+
+                int sijainti = arpoja.nextInt(5) + 1;
+
+                if (super.getMuodostelma().pelipaikkaOnVarattu(pelipaikka, sijainti)) {
+                    continue;
+                }
+
+                super.getMuodostelma().lisaaPelaajaPaikalleen(pelaaja.getNimi(), pelipaikka, sijainti, super.getPelaajat());
+                break;
+            }
+
+            break;
+        }
+    }
+
+    private void lisaaHyokkaaja(List<Hyokkaajavertailu> hyokkaajat, Random arpoja) {
+
+        int kuka = 0;
+
+        while (true) {
+
+            Pelaaja pelaaja = hyokkaajat.get(kuka).getPelaaja();
+
+            if (super.getMuodostelma().pelaajaOnJoAsetettu(pelaaja.getNimi(), super.getPelaajat())) {
+                kuka++;
+                continue;
+            } else if (pelaaja.getLoukkaantunut()) {
+                kuka++;
+                continue;
+            }
+
+            while (true) {
+
+                int sijainti = arpoja.nextInt(5) + 1;
+
+                if (super.getMuodostelma().pelipaikkaOnVarattu(5, sijainti)) {
+                    continue;
+                }
+
+                super.getMuodostelma().lisaaPelaajaPaikalleen(pelaaja.getNimi(), 5, sijainti, super.getPelaajat());
+                break;
+            }
+
+            break;
+        }
+    }
+
+    private void lisaaMaalivahti(List<Maalivahtivertailu> maalivahdit) {
+        
+        int kuka = 0;
+        
+        while (true) {
+            
+            if (maalivahdit.get(kuka).getPelaaja().getLoukkaantunut()) {
+                kuka++;
+                continue;
+            }
+            
+            super.getMuodostelma().setMaalivahti(maalivahdit.get(kuka).getPelaaja().getNimi(), super.getPelaajat());
+            break;
+        }
+    }
+
 }

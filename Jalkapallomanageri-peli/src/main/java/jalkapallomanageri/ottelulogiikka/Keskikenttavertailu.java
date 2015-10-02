@@ -8,7 +8,7 @@ package jalkapallomanageri.ottelulogiikka;
 import jalkapallomanageri.domain.Pelaaja;
 
 /**
- *
+ * Vertailee joukkueen pelaajia keskikenttäpelaajille merkitsevien taitojen keskiarvon avulla.
  * @author lallimyl
  */
 public class Keskikenttavertailu implements Comparable {
@@ -39,7 +39,7 @@ public class Keskikenttavertailu implements Comparable {
             
             Keskikenttavertailu kk = (Keskikenttavertailu) o;
             
-            return this.merkitsevienTaitojenKeskiarvo.compareTo(kk.getMerkitsevienTaitojenKeskiarvo());
+            return -this.merkitsevienTaitojenKeskiarvo.compareTo(kk.getMerkitsevienTaitojenKeskiarvo());
         }
         
         return 0;

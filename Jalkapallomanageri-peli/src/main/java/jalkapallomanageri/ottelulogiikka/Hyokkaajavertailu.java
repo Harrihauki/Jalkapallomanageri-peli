@@ -8,7 +8,7 @@ package jalkapallomanageri.ottelulogiikka;
 import jalkapallomanageri.domain.Pelaaja;
 
 /**
- *
+ * Vertailee joukkueen pelaajia hyökkääjille merkitsevien taitojen keskiarvon avulla.
  * @author lallimyl
  */
 public class Hyokkaajavertailu implements Comparable {
@@ -39,7 +39,7 @@ public class Hyokkaajavertailu implements Comparable {
             
             Hyokkaajavertailu hyokkaaja = (Hyokkaajavertailu) o;
             
-            return this.merkitsevienTaitojenKeskiarvo.compareTo(hyokkaaja.getMerkitsevienTaitojenKeskiarvo());
+            return -this.merkitsevienTaitojenKeskiarvo.compareTo(hyokkaaja.getMerkitsevienTaitojenKeskiarvo());
         }
         
         return 0;
