@@ -57,12 +57,20 @@ public class Sarja {
     }
     
     /**
+     * Kasvattaa kierroslukua.
      *
      */
     public void seuraavaKierros() {
         
         this.moneskoKierros = this.moneskoKierros + 1;
     }
+    
+    /**
+     * Luo sarjaan joukkueet.
+     * 
+     * @param nimi käyttäjän valitsema nimi joukkueelleen.
+     * @return lista luoduista joukkueista
+     */
 
     private List<Joukkue> luoJoukkueet(String nimi) {
         
@@ -88,7 +96,11 @@ public class Sarja {
         return joukkueetTest;
     }
     
-    
+    /**
+     * Bottijoukkueiden mahdolliset nimet.
+     * 
+     * @return Lista bottijoukkueiden nimistä.
+     */
 
     private List<String> bottienNimet() {
         
@@ -109,8 +121,10 @@ public class Sarja {
     }
 
     /**
+     * Luo kullekin kierrokselle ottelut siten, että joka kierroksella pelataan
+     * uutta joukkuetta vastaan.
      *
-     * @return
+     * @return lista otteluista
      */
     public List<Ottelu> luoKierroksenOttelut() {
         

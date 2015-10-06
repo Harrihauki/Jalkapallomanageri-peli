@@ -101,10 +101,11 @@ public class Muodostelma {
 //    }
 
     /**
+     * Metodi tarkistaa, onko asetettava pelaaja jo asetettu.
      *
-     * @param asetettavanPelaajanNimi
-     * @param pelaajat
-     * @return
+     * @param pelaajat Joukkueen pelaajat
+     * @param asetettavanPelaajanNimi Sen pelaajan nimi, joka halutaan asettaa
+     * @return tieto siitä, onko pelaaja jo asetettu
      */
         public boolean pelaajaOnJoAsetettu(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
 
@@ -193,9 +194,10 @@ public class Muodostelma {
 //    }
 
     /**
+     * Asetetaan maalivahti
      *
-     * @param nimi
-     * @param pelaajat
+     * @param nimi sen pelaajan nimi, joka halutaan asettaa
+     * @param pelaajat joukkueen pelaajat
      */
         public void setMaalivahti(String nimi, Map<String, Pelaaja> pelaajat) {
 
@@ -214,10 +216,11 @@ public class Muodostelma {
 //    }
 
     /**
+     * Metodi tarkistaa, onko pelipaikka jo varattu, jolle halutaan asettaa pelaaja
      *
-     * @param pelipaikka
-     * @param sijainti
-     * @return
+     * @param pelipaikka asema kentän pituussuunnassa
+     * @param sijainti asema kentän leveyssuunnassa
+     * @return tieto siitä, onko joku avauksen pelaaja jo kyseisellä paikalla
      */
         public boolean pelipaikkaOnVarattu(int pelipaikka, int sijainti) {
 
@@ -248,10 +251,11 @@ public class Muodostelma {
 //    }
 
     /**
+     * Tarkistetaan, onko haluttu pelaaja joukkueessa
      *
-     * @param asetettavanPelaajanNimi
-     * @param pelaajat
-     * @return
+     * @param asetettavanPelaajanNimi sen pelaajan nimi, joka halutaan asettaa
+     * @param pelaajat joukkueen pelaajat
+     * @return tieto siitä, onko pelaajaa olemassa
      */
         public boolean pelaajaaEiOle(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
 
@@ -264,11 +268,13 @@ public class Muodostelma {
     }
 
     /**
+     * Pelaaja lisätään avauskentällinen-listaan ja pelaajalle asetetaan tieto
+     * omasta pelipaikastaan
      *
-     * @param asetettavanPelaajanNimi
-     * @param pelipaikka
-     * @param sijainti
-     * @param pelaajat
+     * @param asetettavanPelaajanNimi sen pelaajan nimi, joka halutaan asettaa
+     * @param pelipaikka haluttu asema kentän pituussuunnassa
+     * @param sijainti haluttu asema kentän leveyssuunnassa
+     * @param pelaajat joukkueen pelaajat
      */
     public void lisaaPelaajaPaikalleen(String asetettavanPelaajanNimi, int pelipaikka, int sijainti, Map<String, Pelaaja> pelaajat) {
 
@@ -280,6 +286,7 @@ public class Muodostelma {
     }
 
     /**
+     * 
      *
      * @return
      */
@@ -298,6 +305,7 @@ public class Muodostelma {
     }
 
     /**
+     * Tyhjentää vanhat tiedot uusien asettamista varten
      *
      */
     public void alustaMuodostelma() {

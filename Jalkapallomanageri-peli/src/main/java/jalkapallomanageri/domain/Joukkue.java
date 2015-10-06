@@ -40,8 +40,9 @@ public abstract class Joukkue {
     }
     
     /**
+     * Metodi generoi joukkueelle 18 pelaajaa
      *
-     * @param generaattori
+     * @param generaattori Pelaajageneraattori pelaajien luomista varten
      */
     public void generoiPelaajat(Pelaajageneraattori generaattori) {
         
@@ -75,6 +76,9 @@ public abstract class Joukkue {
         return this.muodostelma;
     }
     
+    /**
+     *
+     */
     public void setMuodostelma() {
         
         

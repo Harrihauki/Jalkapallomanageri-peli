@@ -28,6 +28,9 @@ public class BottiJoukkue extends Joukkue {
         super(nimi);
     }
 
+    /**
+     * Metodi asettaa joukkueelle automaattisesti fiksuhkon muodustelman
+     */
     @Override
     public void setMuodostelma() {
         
@@ -84,6 +87,12 @@ public class BottiJoukkue extends Joukkue {
         }
 
     }
+    
+    /** 
+     * Asettaa pelaajat parhausjärjestykseen maalivahtitaitojen perusteella
+     * 
+     * @return lista pelaajien soveltuvuudesta maalivahdeiksi
+     */
 
     private List<Maalivahtivertailu> maalivahtienVertailu() {
 
@@ -99,6 +108,12 @@ public class BottiJoukkue extends Joukkue {
 
         return vertailu;
     }
+    
+    /**
+     * Asettaa pelaajat järjestykseen puolustajalle merkitsevien taitojen perusteella
+     * 
+     * @return lista pelaajien soveltuvuudesta puolustajiksi
+     */
 
     private List<Puolustajavertailu> puolustajienVertailu() {
 
@@ -114,6 +129,12 @@ public class BottiJoukkue extends Joukkue {
 
         return vertailu;
     }
+    
+    /**
+     * Asettaa pelaajat järjestykseen keskikenttapelaajille merkitsevien taitojen perusteella
+     * 
+     * @return lista pelaajien soveltuvuudesta keskikenttäpelaajiksi
+     */
 
     private List<Keskikenttavertailu> keskikenttaVertailu() {
 
@@ -129,6 +150,12 @@ public class BottiJoukkue extends Joukkue {
 
         return vertailu;
     }
+    
+    /**
+     * Asettaa pelaajat järjestykseen hyökkääjille merkitsevien taitojen perusteella
+     * 
+     * @return lista pelaajien soveltuvuudesta hyökkääjiksi
+     */
 
     private List<Hyokkaajavertailu> hyokkaajienVertailu() {
 
@@ -144,6 +171,15 @@ public class BottiJoukkue extends Joukkue {
 
         return vertailu;
     }
+    
+    /**
+     * Metodi asettaa parhaan, vielä asettamattoman ja loukkaantumattoman pelaajan
+     * puolustajaksi
+     * 
+     * @param puolustajat järjestetty lista pelaajien soveltuvuudesta puolustajiksi
+     * @param arpoja satunnaislukugeneraattori, jolla arvotaan pelaajan sijainti
+     * kentällä leveyssuunnassa
+     */
 
     private void lisaaPuolustaja(List<Puolustajavertailu> puolustajat, Random arpoja) {
 
@@ -176,6 +212,15 @@ public class BottiJoukkue extends Joukkue {
             break;
         }
     }
+    
+    /**
+     * Metodi asettaa parhaan, vielä asettamattoman ja loukkaantumattoman pelaajan
+     * keskikenttapelaajaksi
+     * 
+     * @param keskikenttapelaajat järjestetty lista pelaajien soveltuvuudesta keskikenttäpelaajiksi
+     * @param arpoja satunnaislukugeneraattori, jolla arvotaan pelaajan sijainti
+     * keskikentällä
+     */
 
     private void lisaaKeskikenttapelaaja(List<Keskikenttavertailu> keskikenttapelaajat, Random arpoja) {
 
@@ -218,6 +263,15 @@ public class BottiJoukkue extends Joukkue {
             break;
         }
     }
+    
+    /**
+     * Metodi asettaa parhaan, vielä asettamattoman ja loukkaantumattoman pelaajan
+     * hyökkääjäksi
+     * 
+     * @param hyokkaajat järjestetty lista pelaajien soveltuvuudesta hyökkääjiksi
+     * @param arpoja satunnaislukugeneraattori, jolla arvotaan pelaajan sijainti
+     * hyökkäyssektorilla
+     */
 
     private void lisaaHyokkaaja(List<Hyokkaajavertailu> hyokkaajat, Random arpoja) {
 
@@ -250,6 +304,13 @@ public class BottiJoukkue extends Joukkue {
             break;
         }
     }
+    
+    /**
+     * Metodi asettaa parhaan loukkaantumattoman pelaajan
+     * maalivahdiksi
+     * 
+     * @param maalivahdit järjestetty lista pelaajien soveltuvuudesta maalivahdeiksi
+     */
 
     private void lisaaMaalivahti(List<Maalivahtivertailu> maalivahdit) {
         

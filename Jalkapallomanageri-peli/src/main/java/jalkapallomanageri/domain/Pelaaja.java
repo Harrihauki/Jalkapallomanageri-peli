@@ -137,6 +137,8 @@ public class Pelaaja {
     }
 
     /**
+     * Muuttaa pelaajan loukkaantunut-attribuutin arvoksi "true", jolloin pelaaja
+     * ei voi pelata seuraavassa ottelussa
      *
      */
     public void loukkaannu() {
@@ -145,6 +147,8 @@ public class Pelaaja {
     }
 
     /**
+     * Muuttaa pelaajan loukkaantunut-attribuutin arvoksi "false", jolloin pelaaja
+     * voi taas pelata
      *
      */
     public void parane() {

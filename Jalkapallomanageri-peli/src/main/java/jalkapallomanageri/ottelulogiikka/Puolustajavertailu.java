@@ -17,7 +17,9 @@ public class Puolustajavertailu implements Comparable {
     private Double merkitsevienTaitojenKeskiarvo;
     
     /**
-     *
+     * Konstruktori laskee keskiarvon taidoille, jotka ovat merkitseviä puolustajien
+     * pelaamisessa. Tätä käytetään pelaajien vertailussa
+     * 
      * @param pelaaja
      */
     public Puolustajavertailu(Pelaaja pelaaja) {
@@ -26,15 +28,30 @@ public class Puolustajavertailu implements Comparable {
         this.merkitsevienTaitojenKeskiarvo = (double)(pelaaja.getNopeus() + pelaaja.getPuolustus() + pelaaja.getSijoittuminen() + pelaaja.getSyottaminen()) / 4;
     }
     
+    /**
+     *
+     * @return
+     */
     public Pelaaja getPelaaja() {
         
         return this.pelaaja;
     }
     
+    /**
+     *
+     * @return
+     */
     public double getMerkitsevienTaitojenKeskiarvo() {
         
         return this.merkitsevienTaitojenKeskiarvo;
     }
+    
+    /**
+     *  Vertaillaan pelaajia merkitsevien taitojen keskiarvon perusteella.
+     * 
+     * @param o Toinen Puolustajavertailu-luokan olio
+     * @return 
+     */
 
     @Override
     public int compareTo(Object o) {

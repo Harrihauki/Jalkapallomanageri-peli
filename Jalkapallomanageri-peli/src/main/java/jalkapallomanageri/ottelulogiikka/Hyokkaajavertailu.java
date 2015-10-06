@@ -16,21 +16,42 @@ public class Hyokkaajavertailu implements Comparable {
     private Pelaaja pelaaja;
     private Double merkitsevienTaitojenKeskiarvo;
     
+    /**
+     * Konstruktori laskee keskiarvon taidoille, jotka ovat merkitseviä hyökkääjän
+     * pelaamisessa. Tätä käytetään pelaajien vertailussa
+     *
+     * @param pelaaja
+     */
     public Hyokkaajavertailu(Pelaaja pelaaja) {
         
         this.pelaaja = pelaaja;
         this.merkitsevienTaitojenKeskiarvo = (double)(pelaaja.getHarhauttaminen() + pelaaja.getMaalinteko() + pelaaja.getNopeus() + pelaaja.getSijoittuminen() + pelaaja.getSyottaminen() / 5);
     }
     
+    /**
+     *
+     * @return
+     */
     public Pelaaja getPelaaja() {
         
         return this.pelaaja;
     }
     
+    /**
+     *
+     * @return
+     */
     public double getMerkitsevienTaitojenKeskiarvo() {
         
         return this.merkitsevienTaitojenKeskiarvo;
     }
+    
+    /**
+     * Vertaillaan pelaajia merkitsevien taitojen keskiarvon perusteella.
+     * 
+     * @param o Toinen Hyokkaajavertailu-luokan olio
+     * @return 
+     */
 
     @Override
     public int compareTo(Object o) {

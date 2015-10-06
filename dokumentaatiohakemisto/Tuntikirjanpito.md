@@ -23,3 +23,5 @@
 29.9. 2h - Pit-testien puintia ja testien lisäämistä ja parantelua. Pelaajien keskinäiseen vertailuun tarkoitetut luokat luotu. Bottijoukkue-luokkaan alettu tehdä metodia pelaajien muodostelman asettamista varten.
 
 2.10. 5h - Bottijoukkueen muodostelman asettaminen valmis. Testeja Bottijoukkue- ja Sarja-luokkiin. Testien korjailua pitin mukaan. Luokkakaavio. Javadocia hiukan täydennetty.
+
+6.10. 2h - Viilausta pariin metodiin. Javadoc valmiiksi. Infernaalista pähkäilyä, miten graafinen käyttöliittymä toimii. Nyt jo ikkuna ja kolme nappia, jotka eivät tee mitään.

@@ -137,9 +137,10 @@ public class Ottelu {
     }
     
     /**
+     * Laskee vastustajan pelaajien etäisyydet halutusta pelaajasta
      *
      * @param pelaaja
-     * @return
+     * @return Map, avaimena vastustajan pelaaja ja arvona etäisyys halutusta pelaajasta
      */
     public Map<Pelaaja, Double> laskeVastustajienEtaisyydet(Pelaaja pelaaja) {
         
@@ -156,9 +157,11 @@ public class Ottelu {
     }
 
     /**
+     * Palautetaan listana sen joukkueen pelaajat, jonka pelaaja nykyinen 
+     * pallonhaltija on.
      *
      * @param pallollinenPelaaja
-     * @return
+     * @return lista joukkueen pelaajista
      */
     public List<Pelaaja> pallollisenJoukkueenPelaajat(Pelaaja pallollinenPelaaja) {
         
@@ -171,9 +174,11 @@ public class Ottelu {
     }
     
     /**
+     * Palautetaan listana sen joukkueen pelaajat, jonka pelaaja nykyinen 
+     * pallonhaltija ei ole.
      *
      * @param pallollinenPelaaja
-     * @return
+     * @return lista joukkueen pelaajista
      */
     public List<Pelaaja> pallottomanJoukkueenPelaajat(Pelaaja pallollinenPelaaja) {
         
@@ -186,10 +191,11 @@ public class Ottelu {
     }
 
     /**
+     * Laskee oman pelaajan etäisyyden halutusta pelaajasta
      *
      * @param pelaaja
      * @param vertailtava
-     * @return
+     * @return eäisyys desimaalilukuna
      */
     public double omanPelaajanEtaisyys(Pelaaja pelaaja, Pelaaja vertailtava) {
         
@@ -199,10 +205,11 @@ public class Ottelu {
     }
     
     /**
+     * Laskee vastustajan pelaajan etäisyyden halutusta pelaajasta.
      *
-     * @param pelaaja
-     * @param vertailtava
-     * @return
+     * @param pelaaja haluttu pelaaja
+     * @param vertailtava vastustajan pelaaja
+     * @return etäisyys desimaalilukuna
      */
     public double vastustajanEtaisyys(Pelaaja pelaaja, Pelaaja vertailtava) {
         
@@ -212,8 +219,10 @@ public class Ottelu {
     }
     
     /**
+     * Arpoo kolmesta lähimmästä vastustajasta, ketä vastaan pallollinen pelaaja
+     * pelaa
      *
-     * @return
+     * @return pelaaja vastustaja
      */
     public Pelaaja ketaVastaan() {
         
@@ -227,8 +236,10 @@ public class Ottelu {
     }
     
     /**
+     * Arpoo etäisyyden mukaan painotetusti, kenelle pallollinen pelaaja yrittää
+     * syöttää
      *
-     * @return
+     * @return pelaaja, syötön kohde
      */
     public Pelaaja kenelleSyotetaan() {
         
@@ -242,9 +253,10 @@ public class Ottelu {
     }
 
     /**
+     * Järjestää halutut pelaajat etäisyyden mukaan järjestykseen
      *
      * @param jarjestettavatPelaajat
-     * @return
+     * @return järjestetty lista pelaajien Etaisyydenhaltijoista
      */
     public List<Etaisyydenhaltija> etaisyydetJarjestyksessa(Map<Pelaaja, Double> jarjestettavatPelaajat) {
         
@@ -261,6 +273,16 @@ public class Ottelu {
         
         return etaisyydetJarjestyksessa;
     }
+    
+    /**
+     * Arpoo halutun listan pelaajista parametrin mukaisesta määrästä ensimmäisiä,
+     * kuka otetaan kohteeksi. Esimerkiksi syötön kohteet ja puolustajat arvotaan
+     * tällä.
+     * 
+     * @param pelaajatJarjestyksessa mahdolliset kohteet
+     * @param kuinkaMonesta kuinka monesta ensimmäisestä kohde arvotaan
+     * @return kohdepelaaja
+     */
 
     private Pelaaja arvoKohde(List<Etaisyydenhaltija> pelaajatJarjestyksessa, int kuinkaMonesta) {
         
@@ -280,11 +302,13 @@ public class Ottelu {
     }
     
     /**
+     * Arpoo painotetusti pelaajien taitojen ja etäisyyksien mukaan, onnistuuko
+     * syöttö
      *
-     * @param syottaja
-     * @param puolustaja
-     * @param kohde
-     * @return
+     * @param syottaja pallollinen pelaaja
+     * @param puolustaja puolustava pelaaja
+     * @param kohde syötön kohde
+     * @return tieto siitä, onnistuuko syöttö
      */
     public boolean onnistuukoSyotto(Pelaaja syottaja, Pelaaja puolustaja, Pelaaja kohde) {
         
@@ -301,9 +325,11 @@ public class Ottelu {
     }
     
     /**
+     * Arpoo pelaajien taitojen ja sijaintien perusteella, pääseekö syötön 
+     * vastaanottanut pelaaja maalipaikkaan syötön jälkeen
      *
-     * @param puolustaja
-     * @return
+     * @param puolustaja puolustaja
+     * @return tieto siitä, pääseekö pelaaja maalipaikkaan
      */
     public boolean paaseekoMaalipaikkaanSyotosta(Pelaaja puolustaja) {
         
@@ -320,8 +346,9 @@ public class Ottelu {
     }
     
     /**
+     * Arpoo pelaajien taitojen perusteella, onnistuuko pelaaja maalinteossa.
      *
-     * @return
+     * @return tieto siitä, syntyykö maali
      */
     public boolean tuleekoMaali() {
         
@@ -346,8 +373,10 @@ public class Ottelu {
     }
     
     /**
+     * Arpoo pelaajien taitojen ja sijainnin perusteella, pääseekö riiston tehnyt pelaaja
+     * vastahyökkäykseen
      *
-     * @return
+     * @return tieto siitä, tuleeko vastahyökkäys
      */
     public boolean tuleekoVastahyokkays() {
         
@@ -364,8 +393,10 @@ public class Ottelu {
     }
     
     /**
+     * Arpoo painotetusti pelaajan sijainnin perusteella, lähteekö pelaaja 
+     * harhauttamaan vai syöttämään
      *
-     * @return
+     * @return tieto päätöksestä
      */
     public boolean lahteekoHarhauttamaan() {
         
@@ -382,9 +413,10 @@ public class Ottelu {
     }
     
     /**
+     * Arpoo pelaajien taitojen perusteella, onnistuuko harhautus.
      *
      * @param puolustaja
-     * @return
+     * @return tieto onnistumisesta
      */
     public boolean onnistuukoHarhautus(Pelaaja puolustaja) {
         
@@ -401,9 +433,11 @@ public class Ottelu {
     }
     
     /**
+     * Arpoo painotetusti pelaajien sijaintien perusteella, pääseekö pelaaja
+     * maalipaikkaan onnistuneesta harhautuksesta
      *
      * @param puolustaja
-     * @return
+     * @return tieto onnistumisesta
      */
     public boolean paaseekoMaalipaikkaanHarhautuksesta(Pelaaja puolustaja) {
         

@@ -44,6 +44,14 @@ public class Etaisyydenhaltija implements Comparable {
         
         return this.etaisyys;
     }
+    
+    /**
+     * Pelaajat asetetaan compareTo-metodin avulla etäisyyden mukaan pienimmästä
+     * suurimpaan. Luokan tärkein ominaisuus.
+     * 
+     * @param o toinen Etaisyydenhaltija-luokan olio
+     * @return vertailu
+     */
 
     @Override
     public int compareTo(Object o) {

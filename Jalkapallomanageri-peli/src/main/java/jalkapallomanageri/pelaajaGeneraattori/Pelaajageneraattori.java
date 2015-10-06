@@ -25,8 +25,10 @@ public class Pelaajageneraattori {
     }
 
     /**
+     * Luo pelaajan satunnaisesti. Saattaa luoda "erikoispelaajan", tai sitten
+     * arpoo pelaajalle nimen ja taidot.
      *
-     * @return
+     * @return luotu pelaaja
      */
     public Pelaaja luoPelaaja() {
 
@@ -54,8 +56,9 @@ public class Pelaajageneraattori {
     }
 
     /**
+     * Arpoo painotetusti, minkä arvosanan pelaaja saa taidolleen.
      *
-     * @return
+     * @return arvottu arvosana
      */
     public int arvoArvo() {
 

@@ -16,21 +16,42 @@ public class Maalivahtivertailu implements Comparable {
     private Pelaaja pelaaja;
     private Double merkitsevienTaitojenKeskiarvo;
     
+    /**
+     *Konstruktori laskee keskiarvon taidoille, jotka ovat merkitseviä hyökkääjän
+     * pelaamisessa. Tätä käytetään pelaajien vertailussa
+     * 
+     * @param pelaaja
+     */
     public Maalivahtivertailu(Pelaaja pelaaja) {
         
         this.pelaaja = pelaaja;
         this.merkitsevienTaitojenKeskiarvo = (double)(pelaaja.getMaalivahti() + pelaaja.getSijoittuminen()) / 2;
     }
     
+    /**
+     *
+     * @return
+     */
     public Pelaaja getPelaaja() {
         
         return this.pelaaja;
     }
     
+    /**
+     *
+     * @return
+     */
     public double getMerkitsevienTaitojenKeskiarvo() {
         
         return this.merkitsevienTaitojenKeskiarvo;
     }
+    
+    /**
+     * Vertaillaan pelaajia merkitsevien taitojen keskiarvon perusteella.
+     * 
+     * @param o Toinen Hyokkaajavertailu-luokan olio
+     * @return 
+     */
 
     @Override
     public int compareTo(Object o) {
