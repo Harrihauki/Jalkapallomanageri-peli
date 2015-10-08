@@ -70,17 +70,17 @@ public class Pelaajageneraattori {
             return 2;
         } else if (taso < 33) {
             return 3;
-        } else if (taso < 46) {
+        } else if (taso < 48) {
             return 4;
-        } else if (taso < 60) {
+        } else if (taso < 63) {
             return 5;
-        } else if (taso < 73) {
+        } else if (taso < 76) {
             return 6;
-        } else if (taso < 85) {
+        } else if (taso < 87) {
             return 7;
-        } else if (taso < 96) {
+        } else if (taso < 98) {
             return 8;
-        } else if (taso < 104) {
+        } else if (taso < 105) {
             return 9;
         } else {
             return 10;

@@ -9,6 +9,7 @@ import jalkapallomanageri.domain.BottiJoukkue;
 import jalkapallomanageri.domain.Joukkue;
 import jalkapallomanageri.domain.KayttajanJoukkue;
 import jalkapallomanageri.domain.Pelaaja;
+import jalkapallomanageri.kayttoliittyma.GraafinenKayttoliittyma;
 import jalkapallomanageri.ottelulogiikka.Ottelu;
 import jalkapallomanageri.pelaajaGeneraattori.Pelaajageneraattori;
 import jalkapallomanageri.sarja.Sarja;
@@ -26,9 +27,11 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        GraafinenKayttoliittyma liittyma = new GraafinenKayttoliittyma();
 
-        Random arpoja = new Random();
-        Sarja sarja = new Sarja("PuiU", arpoja);
+//        Random arpoja = new Random();
+//        Sarja sarja = new Sarja("PuiU", arpoja);
 //        Pelaajageneraattori generaattori = new Pelaajageneraattori(arpoja);
 //        Joukkue joukkue = new KayttajanJoukkue("PuiU");
 //

@@ -24,6 +24,7 @@ public class Sarja {
     private int moneskoKierros;
     private Random arpoja;
     private Pelaajageneraattori generaattori;
+    private Sarjataulukko sarjataulukko;
     
     /**
      *
@@ -36,6 +37,7 @@ public class Sarja {
         this.generaattori = new Pelaajageneraattori(this.arpoja);
         this.joukkueet = luoJoukkueet(joukkueenNimi);
         this.moneskoKierros = 1;
+        this.sarjataulukko = new Sarjataulukko(this.joukkueet);
     }
     
     /**
@@ -45,6 +47,11 @@ public class Sarja {
     public List<Joukkue> getJoukkueet() {
         
         return this.joukkueet;
+    }
+    
+    public Sarjataulukko getSarjataulukko() {
+        
+        return this.sarjataulukko;
     }
     
     /**

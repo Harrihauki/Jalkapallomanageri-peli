@@ -25,3 +25,5 @@
 2.10. 5h - Bottijoukkueen muodostelman asettaminen valmis. Testeja Bottijoukkue- ja Sarja-luokkiin. Testien korjailua pitin mukaan. Luokkakaavio. Javadocia hiukan täydennetty.
 
 6.10. 2h - Viilausta pariin metodiin. Javadoc valmiiksi. Infernaalista pähkäilyä, miten graafinen käyttöliittymä toimii. Nyt jo ikkuna ja kolme nappia, jotka eivät tee mitään.
+
+8.19. 2,5h - Graafisen käyttöliittymän edistämistä. Sarjataulukko- ja Pisteenlaskija-luokkien luominen sarjan pistetilanteen ylläpitämiseen. Pientä viilausta pelaajageneraattori-luokan toimintaan.
