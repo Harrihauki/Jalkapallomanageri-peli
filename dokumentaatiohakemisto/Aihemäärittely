@@ -2,12 +2,10 @@
 
 *Käyttäjä:* Pelaaja.
 
-*Pelaajan käyttötapaukset:*
+Käyttötapaukset:
 
-- Aloita peli
-- Tutki pelaajia
-- Palkkaa pelaajia
-- Siirry otteluun
-- Aseta kokoonpano
-- Tutki sarjatilannetta
+-Pelaajien tarkastelu
+-Sarjataulukon tarkastelu
+-Kokoonpanon asettaminen
+-Ottelun seuraaminen
 

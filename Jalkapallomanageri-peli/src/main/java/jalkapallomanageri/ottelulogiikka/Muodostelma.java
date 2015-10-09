@@ -99,7 +99,6 @@ public class Muodostelma {
 //
 //        return asetettavanPelaajanNimi;
 //    }
-
     /**
      * Metodi tarkistaa, onko asetettava pelaaja jo asetettu.
      *
@@ -107,7 +106,7 @@ public class Muodostelma {
      * @param asetettavanPelaajanNimi Sen pelaajan nimi, joka halutaan asettaa
      * @return tieto siitä, onko pelaaja jo asetettu
      */
-        public boolean pelaajaOnJoAsetettu(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
+    public boolean pelaajaOnJoAsetettu(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
 
         if (this.avauskentallinen.isEmpty()) {
 
@@ -121,7 +120,7 @@ public class Muodostelma {
 
             return true;
         } else if (this.maalivahti != null) {
-            
+
             if (this.maalivahti.equals(pelaajat.get(asetettavanPelaajanNimi))) {
 
                 return true;
@@ -192,16 +191,20 @@ public class Muodostelma {
 //        
 //        return sijainti;
 //    }
-
     /**
      * Asetetaan maalivahti
      *
      * @param nimi sen pelaajan nimi, joka halutaan asettaa
      * @param pelaajat joukkueen pelaajat
      */
-        public void setMaalivahti(String nimi, Map<String, Pelaaja> pelaajat) {
+    public void setMaalivahti(String nimi, Map<String, Pelaaja> pelaajat) {
 
         this.maalivahti = pelaajat.get(nimi);
+    }
+    
+    public void poistaMaalivahti() {
+        
+        this.maalivahti = null;
     }
 
 //    private boolean sijaintiaEiOle(int sijainti) {
@@ -214,15 +217,15 @@ public class Muodostelma {
 //
 //        return false;
 //    }
-
     /**
-     * Metodi tarkistaa, onko pelipaikka jo varattu, jolle halutaan asettaa pelaaja
+     * Metodi tarkistaa, onko pelipaikka jo varattu, jolle halutaan asettaa
+     * pelaaja
      *
      * @param pelipaikka asema kentän pituussuunnassa
      * @param sijainti asema kentän leveyssuunnassa
      * @return tieto siitä, onko joku avauksen pelaaja jo kyseisellä paikalla
      */
-        public boolean pelipaikkaOnVarattu(int pelipaikka, int sijainti) {
+    public boolean pelipaikkaOnVarattu(int pelipaikka, int sijainti) {
 
         for (Pelaaja pelaaja : this.avauskentallinen) {
 
@@ -249,7 +252,6 @@ public class Muodostelma {
 //
 //        return false;
 //    }
-
     /**
      * Tarkistetaan, onko haluttu pelaaja joukkueessa
      *
@@ -257,7 +259,7 @@ public class Muodostelma {
      * @param pelaajat joukkueen pelaajat
      * @return tieto siitä, onko pelaajaa olemassa
      */
-        public boolean pelaajaaEiOle(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
+    public boolean pelaajaaEiOle(String asetettavanPelaajanNimi, Map<String, Pelaaja> pelaajat) {
 
         if (pelaajat.containsKey(asetettavanPelaajanNimi)) {
 
@@ -286,7 +288,7 @@ public class Muodostelma {
     }
 
     /**
-     * 
+     *
      *
      * @return
      */

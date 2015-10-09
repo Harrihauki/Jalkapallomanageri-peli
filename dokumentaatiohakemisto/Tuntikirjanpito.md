@@ -26,4 +26,6 @@
 
 6.10. 2h - Viilausta pariin metodiin. Javadoc valmiiksi. Infernaalista pähkäilyä, miten graafinen käyttöliittymä toimii. Nyt jo ikkuna ja kolme nappia, jotka eivät tee mitään.
 
-8.19. 2,5h - Graafisen käyttöliittymän edistämistä. Sarjataulukko- ja Pisteenlaskija-luokkien luominen sarjan pistetilanteen ylläpitämiseen. Pientä viilausta pelaajageneraattori-luokan toimintaan.
+8.10. 2,5h - Graafisen käyttöliittymän edistämistä. Sarjataulukko- ja Pisteenlaskija-luokkien luominen sarjan pistetilanteen ylläpitämiseen. Pientä viilausta pelaajageneraattori-luokan toimintaan.
+
+9.10. 4h - Lisää graafista käyttöliittymää. Muuten lähinnä pieniä parannuksi.
