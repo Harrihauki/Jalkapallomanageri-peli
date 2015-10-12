@@ -29,3 +29,5 @@
 8.10. 2,5h - Graafisen käyttöliittymän edistämistä. Sarjataulukko- ja Pisteenlaskija-luokkien luominen sarjan pistetilanteen ylläpitämiseen. Pientä viilausta pelaajageneraattori-luokan toimintaan.
 
 9.10. 4h - Lisää graafista käyttöliittymää. Muuten lähinnä pieniä parannuksi.
+
+12.10. 4,5h - Käyttöliittymän Ottelusimulaattori-luokan väsäämistä. Pientä lisäilyä GraaffinenKayttoliittymaan ja muutamia muita pieniä muutoksia.

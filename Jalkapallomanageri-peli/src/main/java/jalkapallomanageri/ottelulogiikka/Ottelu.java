@@ -112,6 +112,11 @@ public class Ottelu {
         this.pallonhaltija = pelaaja;
     }
     
+    public Pelaaja getPallonhaltija() {
+        
+        return this.pallonhaltija;
+    }
+    
     /**
      * Laskee omien pelaajien etäisyydet pelaajasta
      * @param pelaaja 
@@ -310,10 +315,10 @@ public class Ottelu {
      * @param kohde syötön kohde
      * @return tieto siitä, onnistuuko syöttö
      */
-    public boolean onnistuukoSyotto(Pelaaja syottaja, Pelaaja puolustaja, Pelaaja kohde) {
+    public boolean onnistuukoSyotto(Pelaaja puolustaja, Pelaaja kohde) {
         
-        double taitojenSumma = syottaja.getSyottaminen() + kohde.getSijoittuminen() + puolustaja.getPuolustus() + puolustaja.getSijoittuminen() + omanPelaajanEtaisyys(syottaja, kohde);
-        double taitojenSuhde = (syottaja.getSyottaminen() + kohde.getSijoittuminen()) / taitojenSumma;
+        double taitojenSumma = this.pallonhaltija.getSyottaminen() + kohde.getSijoittuminen() + puolustaja.getPuolustus() + puolustaja.getSijoittuminen() + omanPelaajanEtaisyys(this.pallonhaltija, kohde);
+        double taitojenSuhde = (this.pallonhaltija.getSyottaminen() + kohde.getSijoittuminen()) / taitojenSumma;
         
         double onnistuminen = this.arpoja.nextDouble();
         
