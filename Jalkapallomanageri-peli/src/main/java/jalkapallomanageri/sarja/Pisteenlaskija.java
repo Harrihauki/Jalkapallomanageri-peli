@@ -102,12 +102,20 @@ public class Pisteenlaskija implements Comparable {
                     return 0;
                 }
                 
-                return -vertailtava.tehdytMaalit - this.tehdytMaalit;
+                return vertailtava.tehdytMaalit - this.tehdytMaalit;
+            }
+            
+            if (vertailtava.getMaaliero() < 0 && this.getMaaliero() < 0) {
+                return vertailtava.getMaaliero() - this.getMaaliero();
+            } else if (vertailtava.getMaaliero() < 0) {
+                return -1;
+            } else if (this.getMaaliero() < 0) {
+                return 1;
             }
             
             return -vertailtava.getMaaliero() - this.getMaaliero();
         }
         
-        return -vertailtava.getPisteet() - this.pisteet;
+        return vertailtava.getPisteet() - this.pisteet;
     }
 }

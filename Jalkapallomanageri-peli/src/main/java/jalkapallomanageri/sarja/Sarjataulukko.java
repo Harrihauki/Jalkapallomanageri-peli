@@ -37,6 +37,11 @@ public class Sarjataulukko {
         Collections.sort(this.pisteet);
     }
     
+    public List<Pisteenlaskija> getPisteenlaskijat() {
+        
+        return this.pisteet;
+    }
+    
     @Override
     public String toString() {
         

@@ -8,7 +8,9 @@ package jalkapallomanageri.kayttoliittyma;
 import jalkapallomanageri.domain.Pelaaja;
 import jalkapallomanageri.kello.Kello;
 import jalkapallomanageri.ottelulogiikka.Ottelu;
+import java.awt.CardLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
@@ -16,7 +18,7 @@ import javax.swing.JTextPane;
  *
  * @author lallimyl
  */
-public class Ottelusimulaattori implements Runnable {
+public class Ottelusimulaattori {
 
     private Ottelu ottelu;
     private int viive;
@@ -31,9 +33,29 @@ public class Ottelusimulaattori implements Runnable {
     private String tulosterivi3;
     private String tulosterivi4;
     private String tulosterivi5;
+    private CardLayout cl;
+    private JPanel jPanel4;
 
-    public Ottelusimulaattori(Ottelu ottelu, int viive, JTextArea raportti, JTextPane aika, JTextPane joukkueet, JLabel tilanne, boolean tulosteet) {
+    public Ottelusimulaattori(Ottelu ottelu, int viive, JTextArea raportti, JTextPane aika, JTextPane joukkueet, JLabel tilanne, boolean tulosteet, CardLayout cl, JPanel jPanel4) {
 
+        this.ottelu = ottelu;
+        this.viive = viive;
+        this.raportti = raportti;
+        this.kello = new Kello();
+        this.tulosteet = tulosteet;
+        this.aika = aika;
+        this.joukkueet = joukkueet;
+        this.tilanne = tilanne;
+        this.tulosterivi1 = "";
+        this.tulosterivi2 = "";
+        this.tulosterivi3 = "";
+        this.tulosterivi4 = "";
+        this.tulosterivi5 = "";
+        this.cl = cl;
+        this.jPanel4 = jPanel4;
+    }
+
+    Ottelusimulaattori(Ottelu ottelu, int viive, JTextArea raportti, JTextPane aika, JTextPane joukkueet, JLabel tilanne, boolean tulosteet) {
         this.ottelu = ottelu;
         this.viive = viive;
         this.raportti = raportti;
@@ -49,9 +71,8 @@ public class Ottelusimulaattori implements Runnable {
         this.tulosterivi5 = "";
     }
 
-    @Override
-    public void run() {
-
+    public void pelaa() {
+        cl.show(jPanel4, "card4");  
         if (this.tulosteet) {
             this.joukkueet.setText(ottelu.getKoti().getNimi() + " - " + ottelu.getVieras().getNimi());
             this.aika.setText(this.kello.toString());
@@ -61,6 +82,7 @@ public class Ottelusimulaattori implements Runnable {
 
         while (onkoAikaa()) {
 
+             
             Pelaaja puolustaja = this.ottelu.ketaVastaan();
 
             if (this.ottelu.lahteekoHarhauttamaan()) {
@@ -69,7 +91,7 @@ public class Ottelusimulaattori implements Runnable {
                 this.syotto(puolustaja);
             }
         }
-        
+//        
         
     }
 
@@ -104,7 +126,8 @@ public class Ottelusimulaattori implements Runnable {
             }
         }
 
-        this.raportti.setText(this.ottelu.getKoti().getNimi() + " lähti tänään otteluun " + kotipuolustajat + "-" + kotikeskikenttapelaajat + "-" + kotihyokkaajat + "-ryhmiteyksellä.\nVierasjoukkue asettui kentälle " + vieraspuolustajat + "-" + vieraskeskikenttapelaajat + "-" + vierashyokkaajat + "-muodostelmaan.");
+        //this.raportti.setText(this.ottelu.getKoti().getNimi() + " lähti tänään otteluun " + kotipuolustajat + "-" + kotikeskikenttapelaajat + "-" + kotihyokkaajat + "-ryhmiteyksellä.\nVierasjoukkue asettui kentälle " + vieraspuolustajat + "-" + vieraskeskikenttapelaajat + "-" + vierashyokkaajat + "-muodostelmaan.");
+        System.out.println("Päivitettiin ruudun teksti");
 
     }
 
@@ -167,6 +190,7 @@ public class Ottelusimulaattori implements Runnable {
         Pelaaja kohde = this.ottelu.kenelleSyotetaan();
 
         if (this.ottelu.onnistuukoSyotto(puolustaja, kohde)) {
+            this.ottelu.setPallonhaltija(kohde);
             onnistunutSyotto(puolustaja);
         } else {
             pallonriisto(puolustaja);
@@ -174,14 +198,14 @@ public class Ottelusimulaattori implements Runnable {
     }
 
     private void tulosta(String uusiTuloste) {
-
-        this.tulosterivi5 = this.tulosterivi4;
-        this.tulosterivi4 = this.tulosterivi3;
-        this.tulosterivi3 = this.tulosterivi2;
-        this.tulosterivi2 = this.tulosterivi1;
-        this.tulosterivi1 = uusiTuloste;
-
-        this.raportti.setText(this.tulosterivi5 + "\n" + "\n" + this.tulosterivi4 + "\n" + "\n" + this.tulosterivi3 + "\n" + "\n" + this.tulosterivi2 + "\n" + "\n" + this.tulosterivi1);
+            System.out.println("LOL");
+//        this.tulosterivi5 = this.tulosterivi4;
+//        this.tulosterivi4 = this.tulosterivi3;
+//        this.tulosterivi3 = this.tulosterivi2;
+//        this.tulosterivi2 = this.tulosterivi1;
+//        this.tulosterivi1 = uusiTuloste;
+//
+//        this.raportti.setText(this.tulosterivi5 + "\n" + "\n" + this.tulosterivi4 + "\n" + "\n" + this.tulosterivi3 + "\n" + "\n" + this.tulosterivi2 + "\n" + "\n" + this.tulosterivi1);
     }
 
     private void onnistunutHarhautus(Pelaaja puolustaja) {
@@ -292,7 +316,7 @@ public class Ottelusimulaattori implements Runnable {
 
         if (tulosteet) {
             this.aika.setText(this.kello.toString());
-            tulosta(this.ottelu.getPallonhaltija().getNimi() + " lähtee kuljettamaan palloa");
+            tulosta(this.ottelu.getPallonhaltija().getNimi() + " saa syötön haltuunsa.");
         }
 
         if (!onkoAikaa()) {

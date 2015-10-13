@@ -5,15 +5,22 @@
  */
 package jalkapallomanageri.kayttoliittyma;
 
+import jalkapallomanageri.domain.Joukkue;
 import jalkapallomanageri.domain.Pelaaja;
 import jalkapallomanageri.ottelulogiikka.Muodostelma;
+import jalkapallomanageri.ottelulogiikka.Ottelu;
+import jalkapallomanageri.sarja.Pisteenlaskija;
 import jalkapallomanageri.sarja.Sarja;
 import jalkapallomanageri.sarja.Sarjataulukko;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
@@ -26,6 +33,7 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     Sarja sarja;
     Random arpoja;
     Map<String, JButton> maalattavat;
+    List<Ottelu> ottelut;
 
     /**
      * Creates new form NewJFrame
@@ -35,6 +43,7 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         this.arpoja = new Random();
         this.sarja = new Sarja("PuiU", arpoja);
         this.maalattavat = new HashMap();
+        this.ottelut = null;
     }
 
     private void pelaajanPoisto(Muodostelma muodostelma, Pelaaja pelaaja) {
@@ -104,6 +113,12 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
+        jButton31 = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jTextArea4 = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jButton32 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -538,6 +553,14 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
         jScrollPane6.setViewportView(jTextPane2);
 
+        jButton31.setText("Jatka");
+        jButton31.setEnabled(false);
+        jButton31.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton31ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -545,37 +568,84 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(82, 82, 82))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33))))))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(57, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton31))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44))
         );
 
         jPanel4.add(jPanel5, "card4");
+
+        jTextArea4.setEditable(false);
+        jTextArea4.setColumns(20);
+        jTextArea4.setRows(5);
+        jScrollPane7.setViewportView(jTextArea4);
+
+        jLabel2.setText("jLabel2");
+
+        jButton32.setText("Jatka");
+        jButton32.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton32ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(198, 198, 198)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
+                        .addComponent(jButton32))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(302, 302, 302)
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton32)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+
+        jPanel4.add(jPanel6, "card5");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -618,7 +688,7 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
+        
         sarja.getJoukkueet().get(0).getMuodostelma().alustaMuodostelma();
         Map<String, Pelaaja> pelaajat = sarja.getJoukkueet().get(0).getPelaajat();
         DefaultListModel malli = new DefaultListModel();
@@ -627,9 +697,9 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
             malli.addElement(pelaaja);
         }
-        
+
         jList1.setModel(malli);
-        
+
         this.maalattavat.clear();
 
         CardLayout cl = (CardLayout) (jPanel4.getLayout());
@@ -653,25 +723,25 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         }
 
         Map<String, Pelaaja> pelaajat = sarja.getJoukkueet().get(0).getPelaajat();
-        Pelaaja pelaaja = pelaajat.get((String)jList1.getSelectedValue());
+        Pelaaja pelaaja = pelaajat.get((String) jList1.getSelectedValue());
         Muodostelma muodostelma = sarja.getJoukkueet().get(0).getMuodostelma();
-        
+
         if (muodostelma.getMaalivahti() != null) {
-            
+
             muodostelma.poistaMaalivahti();
         }
 
         if (muodostelma.pelaajaOnJoAsetettu(pelaaja.getNimi(), pelaajat)) {
-            
+
             pelaajanPoisto(muodostelma, pelaaja);
         }
 
         muodostelma.setMaalivahti(pelaaja.getNimi(), pelaajat);
-        
+
         this.maalattavat.put("MV", jButton1);
-        
+
         for (JButton button : this.maalattavat.values()) {
-            
+
             button.setBackground(Color.red);
         }
     }//GEN-LAST:event_jButton10ActionPerformed
@@ -680,139 +750,244 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
         Muodostelma muodostelma = sarja.getJoukkueet().get(0).getMuodostelma();
         if (muodostelma.getMaalivahti() == null || muodostelma.getAvauskentallinen().size() != 10) {
+            jTextArea2.setText("Aseta täysi kokoonpano, ennen kuin voit jatkaa!");
             return;
         }
         
+        for (Joukkue joukkue : this.sarja.getJoukkueet()) {
+            
+            joukkue.setMuodostelma();
+        }
+
+        this.ottelut = this.sarja.luoKierroksenOttelut();
+//        this.ottelut = new ArrayList();
+//        for (int i = 0; i < 2; i+=2) {
+//            this.ottelut.add(new Ottelu(this.sarja.getJoukkueet().get(i), this.sarja.getJoukkueet().get(i+1), new Random()));
+//        }
+        System.out.println("MIXEI TÄTÄ KUTSUTA");
         CardLayout cl = (CardLayout) (jPanel4.getLayout());
-        cl.show(jPanel4, "card4");
         
+   
+        
+//        ottelut.get(0).getVieras().setMuodostelma();
+        Ottelusimulaattori kayttajanOttelu = new Ottelusimulaattori(ottelut.get(0), 1000, jTextArea3, jTextPane1, jTextPane2, jLabel1, true,cl, jPanel4);
+//
+        kayttajanOttelu.pelaa();
+//
+        jButton31.setEnabled(rootPaneCheckingEnabled);
         //ottelun aloitus
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        
+
         this.pelaajanLisays(1, 1);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        
+
         this.pelaajanLisays(1, 2);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        
+
         this.pelaajanLisays(1, 3);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+
         this.pelaajanLisays(1, 4);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        
+
         this.pelaajanLisays(1, 5);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        
+
         this.pelaajanLisays(2, 1);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        
+
         this.pelaajanLisays(2, 2);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        
+
         this.pelaajanLisays(2, 3);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        
+
         this.pelaajanLisays(2, 4);
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        
+
         this.pelaajanLisays(2, 5);
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        
+
         this.pelaajanLisays(3, 1);
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
-        
+
         this.pelaajanLisays(3, 2);
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-        
+
         this.pelaajanLisays(3, 3);
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
-        
+
         this.pelaajanLisays(3, 4);
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
-        
+
         this.pelaajanLisays(3, 5);
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
-        
+
         this.pelaajanLisays(4, 1);
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
-        
+
         this.pelaajanLisays(4, 2);
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
-        
+
         this.pelaajanLisays(4, 3);
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
-        
+
         this.pelaajanLisays(4, 4);
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
-        
+
         this.pelaajanLisays(4, 5);
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
-        
+
         this.pelaajanLisays(5, 1);
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
-        
+
         this.pelaajanLisays(5, 2);
     }//GEN-LAST:event_jButton27ActionPerformed
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
-        
+
         this.pelaajanLisays(5, 3);
     }//GEN-LAST:event_jButton28ActionPerformed
 
     private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
-        
+
         this.pelaajanLisays(5, 4);
     }//GEN-LAST:event_jButton29ActionPerformed
 
     private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
-        
+
         this.pelaajanLisays(5, 5);
     }//GEN-LAST:event_jButton30ActionPerformed
+
+    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+
+        jButton31.setEnabled(rootPaneCheckingEnabled);
+        jButton31.setText("Odota..");
+
+        for (Joukkue joukkue : this.sarja.getJoukkueet()) {
+            joukkue.setMuodostelma();
+        }
+
+        for (int i = 1; i < this.ottelut.size(); i++) {
+            Ottelusimulaattori simulaattori = new Ottelusimulaattori(ottelut.get(i), 0, jTextArea3, jTextPane1, jTextPane2, jLabel1, false);
+            simulaattori.pelaa();
+        }
+
+        String tuloste = "";
+
+        for (Ottelu ottelu : this.ottelut) {
+
+            tuloste = tuloste + ottelu.toString() + "\n";
+        }
+
+        jLabel2.setText("Kierros " + this.sarja.getKierrokset());
+        jTextArea4.setText(tuloste);
+
+        CardLayout cl = (CardLayout) (jPanel4.getLayout());
+        cl.show(jPanel4, "card5");
+    }//GEN-LAST:event_jButton31ActionPerformed
+
+    private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
+
+        List<Pisteenlaskija> pisteet = this.sarja.getSarjataulukko().getPisteenlaskijat();
+
+        for (Ottelu ottelu : this.ottelut) {
+
+            if (ottelu.getKotimaalit() > ottelu.getVierasmaalit()) {
+
+                for (Pisteenlaskija laskija : pisteet) {
+                    if (laskija.getJoukkue().equals(ottelu.getKoti())) {
+
+                        laskija.lisaaPisteita(3);
+                        laskija.lisaaPaastettyjaMaaleja(ottelu.getVierasmaalit());
+                        laskija.lisaaTehtyjaMaaleja(ottelu.getKotimaalit());
+                    } else if (laskija.getJoukkue().equals(ottelu.getVieras())) {
+
+                        laskija.lisaaTehtyjaMaaleja(ottelu.getVierasmaalit());
+                        laskija.lisaaPaastettyjaMaaleja(ottelu.getKotimaalit());
+                    }
+                }
+            } else if (ottelu.getKotimaalit() == ottelu.getVierasmaalit()) {
+
+                for (Pisteenlaskija laskija : pisteet) {
+                    if (laskija.getJoukkue().equals(ottelu.getKoti())) {
+
+                        laskija.lisaaPisteita(1);
+                        laskija.lisaaPaastettyjaMaaleja(ottelu.getVierasmaalit());
+                        laskija.lisaaTehtyjaMaaleja(ottelu.getKotimaalit());
+                    } else if (laskija.getJoukkue().equals(ottelu.getVieras())) {
+
+                        laskija.lisaaPisteita(1);
+                        laskija.lisaaTehtyjaMaaleja(ottelu.getVierasmaalit());
+                        laskija.lisaaPaastettyjaMaaleja(ottelu.getKotimaalit());
+                    }
+                }
+            } else {
+
+                for (Pisteenlaskija laskija : pisteet) {
+                    if (laskija.getJoukkue().equals(ottelu.getKoti())) {
+
+                        laskija.lisaaPaastettyjaMaaleja(ottelu.getVierasmaalit());
+                        laskija.lisaaTehtyjaMaaleja(ottelu.getKotimaalit());
+                    } else if (laskija.getJoukkue().equals(ottelu.getVieras())) {
+
+                        laskija.lisaaPisteita(3);
+                        laskija.lisaaTehtyjaMaaleja(ottelu.getVierasmaalit());
+                        laskija.lisaaPaastettyjaMaaleja(ottelu.getKotimaalit());
+                    }
+                }
+            }
+        }
+
+        this.sarja.seuraavaKierros();
+
+        CardLayout cl = (CardLayout) (jPanel4.getLayout());
+        cl.show(jPanel4, "card2");
+    }//GEN-LAST:event_jButton32ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -876,6 +1051,8 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
+    private javax.swing.JButton jButton31;
+    private javax.swing.JButton jButton32;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -883,12 +1060,14 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -896,39 +1075,41 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
     // End of variables declaration//GEN-END:variables
 
     private void pelaajanLisays(int pelipaikka, int sijainti) {
-        
+
         if (jList1.getSelectedValue() == null) {
             return;
         }
 
         Map<String, Pelaaja> pelaajat = sarja.getJoukkueet().get(0).getPelaajat();
-        Pelaaja pelaaja = pelaajat.get((String)jList1.getSelectedValue());
+        Pelaaja pelaaja = pelaajat.get((String) jList1.getSelectedValue());
         Muodostelma muodostelma = sarja.getJoukkueet().get(0).getMuodostelma();
-        
+
         if (muodostelma.pelipaikkaOnVarattu(pelipaikka, sijainti)) {
-            
+
             for (Pelaaja avauksenPelaaja : muodostelma.getAvauskentallinen()) {
-                
+
                 if (avauksenPelaaja.getPelipaikka() == pelipaikka) {
-                    
+
                     if (avauksenPelaaja.getSijainti() == sijainti) {
                         muodostelma.getAvauskentallinen().remove(avauksenPelaaja);
-                        
+
                     }
                 }
             }
         }
 
         if (muodostelma.pelaajaOnJoAsetettu(pelaaja.getNimi(), pelaajat)) {
-            
+
             pelaajanPoisto(muodostelma, pelaaja);
         }
 

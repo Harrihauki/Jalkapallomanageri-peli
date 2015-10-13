@@ -337,7 +337,7 @@ public class Ottelu {
      * @return tieto siitä, pääseekö pelaaja maalipaikkaan
      */
     public boolean paaseekoMaalipaikkaanSyotosta(Pelaaja puolustaja) {
-        
+
         double tekijoidenSumma = this.edellinenPallonhaltija.getSyottaminen() * (1 + this.edellinenPallonhaltija.getPelipaikka()/10) + omanPelaajanEtaisyys(this.pallonhaltija, this.edellinenPallonhaltija) + 30 + puolustaja.getSijoittuminen();
         double suhdeluku = (this.edellinenPallonhaltija.getSyottaminen() * (1 + this.edellinenPallonhaltija.getPelipaikka()/10) + omanPelaajanEtaisyys(this.pallonhaltija, this.edellinenPallonhaltija)) / tekijoidenSumma;
         
@@ -456,6 +456,12 @@ public class Ottelu {
         }
         
         return false;
+    }
+    
+    @Override
+    public String toString() {
+        
+        return this.koti + " " + this.kotimaalit + " - " + this.vierasmaalit + " " + this.vieras;
     }
     
     
