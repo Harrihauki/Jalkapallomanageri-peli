@@ -48,10 +48,28 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
     private void pelaajanPoisto(Muodostelma muodostelma, Pelaaja pelaaja) {
 
-        if (muodostelma.getMaalivahti().equals(pelaaja)) {
-            muodostelma.poistaMaalivahti();
+        if (pelaaja == null) {
+            System.out.println("terve");
+            return;
+        }
+
+        if (muodostelma.getMaalivahti() != null) {
+            if (muodostelma.getMaalivahti().equals(pelaaja)) {
+                muodostelma.poistaMaalivahti();
+                this.maalattavat.get("MV").setBackground(Color.lightGray);
+                this.maalattavat.remove("MV");
+                System.out.println("hei");
+            } else {
+                muodostelma.getAvauskentallinen().remove(pelaaja);
+                this.maalattavat.get("" + pelaaja.getPelipaikka() + "." + pelaaja.getSijainti()).setBackground(Color.lightGray);
+                this.maalattavat.remove("" + pelaaja.getPelipaikka() + "." + pelaaja.getSijainti());
+                System.out.println("sunnuntai");
+            }
         } else {
             muodostelma.getAvauskentallinen().remove(pelaaja);
+            this.maalattavat.get("" + pelaaja.getPelipaikka() + "." + pelaaja.getSijainti()).setBackground(Color.lightGray);
+            this.maalattavat.remove("" + pelaaja.getPelipaikka() + "." + pelaaja.getSijainti());
+            System.out.println("moikka");
         }
     }
 
@@ -688,7 +706,7 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
+
         sarja.getJoukkueet().get(0).getMuodostelma().alustaMuodostelma();
         Map<String, Pelaaja> pelaajat = sarja.getJoukkueet().get(0).getPelaajat();
         DefaultListModel malli = new DefaultListModel();
@@ -699,6 +717,10 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         }
 
         jList1.setModel(malli);
+
+        for (JButton buttoni : this.maalattavat.values()) {
+            buttoni.setBackground(Color.LIGHT_GRAY);
+        }
 
         this.maalattavat.clear();
 
@@ -738,7 +760,7 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
         muodostelma.setMaalivahti(pelaaja.getNimi(), pelaajat);
 
-        this.maalattavat.put("MV", jButton1);
+        this.maalattavat.put("MV", jButton10);
 
         for (JButton button : this.maalattavat.values()) {
 
@@ -753,9 +775,9 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
             jTextArea2.setText("Aseta täysi kokoonpano, ennen kuin voit jatkaa!");
             return;
         }
-        
+
         for (Joukkue joukkue : this.sarja.getJoukkueet()) {
-            
+
             joukkue.setMuodostelma();
         }
 
@@ -764,156 +786,180 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 //        for (int i = 0; i < 2; i+=2) {
 //            this.ottelut.add(new Ottelu(this.sarja.getJoukkueet().get(i), this.sarja.getJoukkueet().get(i+1), new Random()));
 //        }
-        System.out.println("MIXEI TÄTÄ KUTSUTA");
         CardLayout cl = (CardLayout) (jPanel4.getLayout());
-        
-   
-        
+
 //        ottelut.get(0).getVieras().setMuodostelma();
-        Ottelusimulaattori kayttajanOttelu = new Ottelusimulaattori(ottelut.get(0), 1000, jTextArea3, jTextPane1, jTextPane2, jLabel1, true,cl, jPanel4);
+        Ottelusimulaattori kayttajanOttelu = new Ottelusimulaattori(ottelut.get(0), jTextArea3, jTextPane1, jTextPane2, jLabel1, true, cl, jPanel4);
 //
         kayttajanOttelu.pelaa();
 //
-        jButton31.setEnabled(rootPaneCheckingEnabled);
+        jButton31.setEnabled(true);
         //ottelun aloitus
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 
         this.pelaajanLisays(1, 1);
+        this.napinMaalaus("1.1", jButton9);
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
 
         this.pelaajanLisays(1, 2);
+        this.napinMaalaus("1.2", jButton8);
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
 
         this.pelaajanLisays(1, 3);
+        this.napinMaalaus("1.3", jButton7);
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
         this.pelaajanLisays(1, 4);
+        this.napinMaalaus("1.4", jButton5);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
 
         this.pelaajanLisays(1, 5);
+        this.napinMaalaus("1.5", jButton6);
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
 
         this.pelaajanLisays(2, 1);
+        this.napinMaalaus("2.1", jButton11);
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
 
         this.pelaajanLisays(2, 2);
+        this.napinMaalaus("2.2", jButton12);
     }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
 
         this.pelaajanLisays(2, 3);
+        this.napinMaalaus("2.3", jButton13);
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
 
         this.pelaajanLisays(2, 4);
+        this.napinMaalaus("2.4", jButton14);
     }//GEN-LAST:event_jButton14ActionPerformed
 
     private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
 
         this.pelaajanLisays(2, 5);
+        this.napinMaalaus("2.5", jButton15);
     }//GEN-LAST:event_jButton15ActionPerformed
 
     private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
 
         this.pelaajanLisays(3, 1);
+        this.napinMaalaus("3.1", jButton16);
     }//GEN-LAST:event_jButton16ActionPerformed
 
     private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
 
         this.pelaajanLisays(3, 2);
+        this.napinMaalaus("3.2", jButton17);
     }//GEN-LAST:event_jButton17ActionPerformed
 
     private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
 
         this.pelaajanLisays(3, 3);
+        this.napinMaalaus("3.3", jButton18);
     }//GEN-LAST:event_jButton18ActionPerformed
 
     private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
 
         this.pelaajanLisays(3, 4);
+        this.napinMaalaus("3.4", jButton19);
     }//GEN-LAST:event_jButton19ActionPerformed
 
     private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
 
         this.pelaajanLisays(3, 5);
+        this.napinMaalaus("3.5", jButton20);
     }//GEN-LAST:event_jButton20ActionPerformed
 
     private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
 
         this.pelaajanLisays(4, 1);
+        this.napinMaalaus("4.1", jButton21);
     }//GEN-LAST:event_jButton21ActionPerformed
 
     private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
 
         this.pelaajanLisays(4, 2);
+        this.napinMaalaus("4.2", jButton22);
     }//GEN-LAST:event_jButton22ActionPerformed
 
     private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
 
         this.pelaajanLisays(4, 3);
+        this.napinMaalaus("4.3", jButton23);
     }//GEN-LAST:event_jButton23ActionPerformed
 
     private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
 
         this.pelaajanLisays(4, 4);
+        this.napinMaalaus("4.4", jButton24);
     }//GEN-LAST:event_jButton24ActionPerformed
 
     private void jButton25ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton25ActionPerformed
 
         this.pelaajanLisays(4, 5);
+        this.napinMaalaus("4.5", jButton25);
     }//GEN-LAST:event_jButton25ActionPerformed
 
     private void jButton26ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton26ActionPerformed
 
         this.pelaajanLisays(5, 1);
+        this.napinMaalaus("5.1", jButton26);
     }//GEN-LAST:event_jButton26ActionPerformed
 
     private void jButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton27ActionPerformed
 
         this.pelaajanLisays(5, 2);
+        this.napinMaalaus("5.2", jButton27);
     }//GEN-LAST:event_jButton27ActionPerformed
 
     private void jButton28ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton28ActionPerformed
 
         this.pelaajanLisays(5, 3);
+        this.napinMaalaus("5.3", jButton28);
     }//GEN-LAST:event_jButton28ActionPerformed
 
     private void jButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton29ActionPerformed
 
         this.pelaajanLisays(5, 4);
+        this.napinMaalaus("5.4", jButton29);
     }//GEN-LAST:event_jButton29ActionPerformed
 
     private void jButton30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton30ActionPerformed
 
         this.pelaajanLisays(5, 5);
+        this.napinMaalaus("5.5", jButton30);
     }//GEN-LAST:event_jButton30ActionPerformed
 
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
 
-        jButton31.setEnabled(rootPaneCheckingEnabled);
-        jButton31.setText("Odota..");
+        jButton31.setEnabled(false);
+        jTextArea3.setText("Odota..");
 
         for (Joukkue joukkue : this.sarja.getJoukkueet()) {
             joukkue.setMuodostelma();
         }
 
+        CardLayout cl = (CardLayout) (jPanel4.getLayout());
+
         for (int i = 1; i < this.ottelut.size(); i++) {
-            Ottelusimulaattori simulaattori = new Ottelusimulaattori(ottelut.get(i), 0, jTextArea3, jTextPane1, jTextPane2, jLabel1, false);
+            Ottelusimulaattori simulaattori = new Ottelusimulaattori(ottelut.get(i), jTextArea3, jTextPane1, jTextPane2, jLabel1, false, cl, jPanel4);
             simulaattori.pelaa();
         }
 
@@ -927,7 +973,6 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         jLabel2.setText("Kierros " + this.sarja.getKierrokset());
         jTextArea4.setText(tuloste);
 
-        CardLayout cl = (CardLayout) (jPanel4.getLayout());
         cl.show(jPanel4, "card5");
     }//GEN-LAST:event_jButton31ActionPerformed
 
@@ -1096,23 +1141,44 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
         if (muodostelma.pelipaikkaOnVarattu(pelipaikka, sijainti)) {
 
+            Pelaaja poistettava = null;
+
             for (Pelaaja avauksenPelaaja : muodostelma.getAvauskentallinen()) {
 
                 if (avauksenPelaaja.getPelipaikka() == pelipaikka) {
 
                     if (avauksenPelaaja.getSijainti() == sijainti) {
-                        muodostelma.getAvauskentallinen().remove(avauksenPelaaja);
-
+                        poistettava = avauksenPelaaja;
                     }
                 }
             }
+
+            this.pelaajanPoisto(muodostelma, poistettava);
         }
 
         if (muodostelma.pelaajaOnJoAsetettu(pelaaja.getNimi(), pelaajat)) {
+            System.out.println("termos");
 
             pelaajanPoisto(muodostelma, pelaaja);
         }
 
         muodostelma.lisaaPelaajaPaikalleen(pelaaja.getNimi(), pelipaikka, sijainti, pelaajat);
+
+        if (muodostelma.getAvauskentallinen().size() > 10) {
+            System.out.println("tulivuori");
+            this.pelaajanPoisto(muodostelma, muodostelma.getAvauskentallinen().get(0));
+        }
+
+        System.out.println("moi");
+    }
+
+    private void napinMaalaus(String paikka, JButton nappi) {
+
+        this.maalattavat.put(paikka, nappi);
+
+        for (JButton button : this.maalattavat.values()) {
+
+            button.setBackground(Color.red);
+        }
     }
 }

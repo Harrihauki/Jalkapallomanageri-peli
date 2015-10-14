@@ -31,3 +31,7 @@
 9.10. 4h - Lisää graafista käyttöliittymää. Muuten lähinnä pieniä parannuksi.
 
 12.10. 4,5h - Käyttöliittymän Ottelusimulaattori-luokan väsäämistä. Pientä lisäilyä GraaffinenKayttoliittymaan ja muutamia muita pieniä muutoksia.
+
+13.10. 6h - Hirveetä tappelua käyttöliittymän kanssa. Huhhuh..
+
+14.10. 7h - Sama jatkuu. Tänään lähti rullaamaan paremmin ja homma alkaa olla finaalissa ohjelmoimisen osalta. Otteluiden luominen korjattu. Pelaajilla nykyisin ihan oikeita nimiä.

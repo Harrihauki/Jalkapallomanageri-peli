@@ -85,28 +85,26 @@ public class SarjaTest {
         
         List<Ottelu> ottelut = sarja.luoKierroksenOttelut();
         
-        assertEquals("HJK", ottelut.get(0).getVieras().getNimi());
+        assertEquals("Reipas", ottelut.get(0).getVieras().getNimi());
     }
     
     @Test
     public void oikeaVastustajaToisellaKierroksella() {
         
-        sarja.seuraavaKierros();
         List<Ottelu> ottelut = sarja.luoKierroksenOttelut();
+        ottelut = sarja.luoKierroksenOttelut();
         
-        assertEquals("VPS", ottelut.get(0).getVieras().getNimi());
+        assertEquals("RoPS", ottelut.get(0).getVieras().getNimi());
     }
     
     @Test
     public void oikeaVastustajaKolmannellaKierroksella() {
         
-        sarja.seuraavaKierros();
-        sarja.seuraavaKierros();
         List<Ottelu> ottelut = sarja.luoKierroksenOttelut();
+        ottelut = sarja.luoKierroksenOttelut();
+        ottelut = sarja.luoKierroksenOttelut();
         
-        assertEquals("VIFK", ottelut.get(0).getVieras().getNimi());
-        assertEquals("HJK", ottelut.get(3).getVieras().getNimi());
-        assertEquals("MIFK", ottelut.get(4).getKoti().getNimi());
+        assertEquals("Ilves", ottelut.get(0).getVieras().getNimi());
     }
     
     public void alustaPuiU() {

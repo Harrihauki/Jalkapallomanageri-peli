@@ -25,6 +25,8 @@ public class Sarja {
     private Random arpoja;
     private Pelaajageneraattori generaattori;
     private Sarjataulukko sarjataulukko;
+    private List<Integer> otteluSuunnittelu1;
+    private List<Integer> otteluSuunnittelu2;
     
     /**
      *
@@ -38,6 +40,16 @@ public class Sarja {
         this.joukkueet = luoJoukkueet(joukkueenNimi);
         this.moneskoKierros = 1;
         this.sarjataulukko = new Sarjataulukko(this.joukkueet);
+        this.otteluSuunnittelu1 = new ArrayList();
+        this.otteluSuunnittelu2 = new ArrayList();
+        
+        for (int i = 0; i < 5; i++) {
+            this.otteluSuunnittelu1.add(i);
+        }
+        
+        for (int i = 9; i > 4; i--) {
+            this.otteluSuunnittelu2.add(i);
+        }
     }
     
     /**
@@ -136,13 +148,16 @@ public class Sarja {
     public List<Ottelu> luoKierroksenOttelut() {
         
         List<Ottelu> ottelut = new ArrayList();
-        int seuraavanKotiJoukkueenIndeksi = 0;
         
-        for (int i = 0; i < this.joukkueet.size() / 2; i++) {
+        for (int i = 0; i < 5; i++) {
             
-            ottelut.add(new Ottelu(this.joukkueet.get(seuraavanKotiJoukkueenIndeksi), this.joukkueet.get((seuraavanKotiJoukkueenIndeksi+this.moneskoKierros) % this.joukkueet.size()), this.arpoja));
-            seuraavanKotiJoukkueenIndeksi = (seuraavanKotiJoukkueenIndeksi + this.moneskoKierros*2) % this.joukkueet.size();
+            ottelut.add(new Ottelu(this.joukkueet.get(this.otteluSuunnittelu1.get(i)), this.joukkueet.get(this.otteluSuunnittelu2.get(i)), this.arpoja));
         }
+        
+        this.otteluSuunnittelu1.add(1, this.otteluSuunnittelu2.get(0));
+        this.otteluSuunnittelu2.remove(0);
+        this.otteluSuunnittelu2.add(this.otteluSuunnittelu1.get(this.otteluSuunnittelu1.size()-1));
+        this.otteluSuunnittelu1.remove(this.otteluSuunnittelu1.size()-1);
         
         return ottelut;
     }

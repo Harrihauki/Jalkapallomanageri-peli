@@ -117,6 +117,11 @@ public class Ottelu {
         return this.pallonhaltija;
     }
     
+    public Pelaaja getEdellinenPallonhaltija() {
+        
+        return this.edellinenPallonhaltija;
+    }
+    
     /**
      * Laskee omien pelaajien etäisyydet pelaajasta
      * @param pelaaja 
@@ -461,7 +466,7 @@ public class Ottelu {
     @Override
     public String toString() {
         
-        return this.koti + " " + this.kotimaalit + " - " + this.vierasmaalit + " " + this.vieras;
+        return this.koti.getNimi() + " " + this.kotimaalit + " - " + this.vierasmaalit + " " + this.vieras.getNimi();
     }
     
     

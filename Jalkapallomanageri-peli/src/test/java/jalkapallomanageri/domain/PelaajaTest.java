@@ -50,7 +50,7 @@ public class PelaajaTest {
     @Test
     public void pelaajanKonstruktoriToimii() {
         
-        assertEquals("Seppo Teppo\nSijoittuminen: 3\nNopeus: 3\nMaalinteko: 3\nSyöttäminen: 3\nPuolustus: 3\nHarhauttaminen: 3\nMaalivahti: 3\nLoukkaantunut: false", pelaaja.toString());
+        assertEquals("Seppo Teppo\nSijoittuminen: 3\nNopeus: 3\nMaalinteko: 3\nSyöttäminen: 3\nPuolustus: 3\nHarhauttaminen: 3\nMaalivahti: 3\nLoukkaantunut: false\n\nTehdyt maalit: 0", pelaaja.toString());
     }
     
     @Test
@@ -68,6 +68,15 @@ public class PelaajaTest {
         pelaaja.parane();
         
         assertEquals(false, pelaaja.getLoukkaantunut());
+    }
+    
+    @Test
+    public void maalitLisaantyvatOikein() {
+        
+        pelaaja.lisaaMaali();
+        pelaaja.lisaaMaali();
+        
+        assertEquals(2, pelaaja.getTehdytMaalit());
     }
     
     

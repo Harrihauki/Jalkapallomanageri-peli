@@ -9,6 +9,11 @@ import jalkapallomanageri.domain.Pelaaja;
 import jalkapallomanageri.kello.Kello;
 import jalkapallomanageri.ottelulogiikka.Ottelu;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -21,61 +26,36 @@ import javax.swing.JTextPane;
 public class Ottelusimulaattori {
 
     private Ottelu ottelu;
-    private int viive;
     private JTextArea raportti;
     private Kello kello;
     private boolean tulosteet;
     private JTextPane aika;
     private JTextPane joukkueet;
     private JLabel tilanne;
-    private String tulosterivi1;
-    private String tulosterivi2;
-    private String tulosterivi3;
-    private String tulosterivi4;
-    private String tulosterivi5;
     private CardLayout cl;
     private JPanel jPanel4;
+    private Map<String, String> tulostus;
+    private Map<String, String> maalitulostus;
 
-    public Ottelusimulaattori(Ottelu ottelu, int viive, JTextArea raportti, JTextPane aika, JTextPane joukkueet, JLabel tilanne, boolean tulosteet, CardLayout cl, JPanel jPanel4) {
+    public Ottelusimulaattori(Ottelu ottelu, JTextArea raportti, JTextPane aika, JTextPane joukkueet, JLabel tilanne, boolean tulosteet, CardLayout cl, JPanel jPanel4) {
 
         this.ottelu = ottelu;
-        this.viive = viive;
         this.raportti = raportti;
         this.kello = new Kello();
         this.tulosteet = tulosteet;
         this.aika = aika;
         this.joukkueet = joukkueet;
         this.tilanne = tilanne;
-        this.tulosterivi1 = "";
-        this.tulosterivi2 = "";
-        this.tulosterivi3 = "";
-        this.tulosterivi4 = "";
-        this.tulosterivi5 = "";
         this.cl = cl;
         this.jPanel4 = jPanel4;
-    }
-
-    Ottelusimulaattori(Ottelu ottelu, int viive, JTextArea raportti, JTextPane aika, JTextPane joukkueet, JLabel tilanne, boolean tulosteet) {
-        this.ottelu = ottelu;
-        this.viive = viive;
-        this.raportti = raportti;
-        this.kello = new Kello();
-        this.tulosteet = tulosteet;
-        this.aika = aika;
-        this.joukkueet = joukkueet;
-        this.tilanne = tilanne;
-        this.tulosterivi1 = "";
-        this.tulosterivi2 = "";
-        this.tulosterivi3 = "";
-        this.tulosterivi4 = "";
-        this.tulosterivi5 = "";
+        this.tulostus = new HashMap();
+        this.maalitulostus = new HashMap();
     }
 
     public void pelaa() {
         cl.show(jPanel4, "card4");  
         if (this.tulosteet) {
             this.joukkueet.setText(ottelu.getKoti().getNimi() + " - " + ottelu.getVieras().getNimi());
-            this.aika.setText(this.kello.toString());
             this.tilanne.setText("0 - 0");
             this.alkuSpiikki();
         }
@@ -92,7 +72,7 @@ public class Ottelusimulaattori {
             }
         }
 //        
-        
+        this.suoritaTulostus();
     }
 
     private void alkuSpiikki() {
@@ -126,8 +106,7 @@ public class Ottelusimulaattori {
             }
         }
 
-        //this.raportti.setText(this.ottelu.getKoti().getNimi() + " lähti tänään otteluun " + kotipuolustajat + "-" + kotikeskikenttapelaajat + "-" + kotihyokkaajat + "-ryhmiteyksellä.\nVierasjoukkue asettui kentälle " + vieraspuolustajat + "-" + vieraskeskikenttapelaajat + "-" + vierashyokkaajat + "-muodostelmaan.");
-        System.out.println("Päivitettiin ruudun teksti");
+        this.tulostus.put(this.kello.toString(), this.ottelu.getKoti().getNimi() + " lähti tänään otteluun " + kotipuolustajat + "-" + kotikeskikenttapelaajat + "-" + kotihyokkaajat + "-ryhmiteyksellä.\nVierasjoukkue asettui kentälle " + vieraspuolustajat + "-" + vieraskeskikenttapelaajat + "-" + vierashyokkaajat + "-muodostelmaan.");
 
     }
 
@@ -142,17 +121,9 @@ public class Ottelusimulaattori {
 
     private void harhautus(Pelaaja puolustaja) {
 
-        try {
-            Thread.sleep(this.viive);
-        } catch (InterruptedException ex) {
-            this.raportti.setText("Ohjelma on kohdannut virheen ja se suljetaan");
-            Thread.currentThread().interrupt();
-        }
-
         this.kello.etene();
 
         if (tulosteet) {
-            this.aika.setText(this.kello.toString());
             tulosta(this.ottelu.getPallonhaltija().getNimi() + " lähtee kuljettamaan palloa");
         }
 
@@ -169,17 +140,9 @@ public class Ottelusimulaattori {
 
     private void syotto(Pelaaja puolustaja) {
 
-        try {
-            Thread.sleep(this.viive);
-        } catch (InterruptedException ex) {
-            this.raportti.setText("Ohjelma on kohdannut virheen ja se suljetaan");
-            Thread.currentThread().interrupt();
-        }
-
         this.kello.etene();
 
         if (tulosteet) {
-            this.aika.setText(this.kello.toString());
             tulosta(this.ottelu.getPallonhaltija().getNimi() + " hakee katseellaan syöttösuuntia.");
         }
 
@@ -198,29 +161,15 @@ public class Ottelusimulaattori {
     }
 
     private void tulosta(String uusiTuloste) {
-            System.out.println("LOL");
-//        this.tulosterivi5 = this.tulosterivi4;
-//        this.tulosterivi4 = this.tulosterivi3;
-//        this.tulosterivi3 = this.tulosterivi2;
-//        this.tulosterivi2 = this.tulosterivi1;
-//        this.tulosterivi1 = uusiTuloste;
-//
-//        this.raportti.setText(this.tulosterivi5 + "\n" + "\n" + this.tulosterivi4 + "\n" + "\n" + this.tulosterivi3 + "\n" + "\n" + this.tulosterivi2 + "\n" + "\n" + this.tulosterivi1);
+
+        this.tulostus.put(this.kello.toString(), uusiTuloste);
     }
 
     private void onnistunutHarhautus(Pelaaja puolustaja) {
 
-        try {
-            Thread.sleep(this.viive);
-        } catch (InterruptedException ex) {
-            this.raportti.setText("Ohjelma on kohdannut virheen ja se suljetaan");
-            Thread.currentThread().interrupt();
-        }
-
         this.kello.etene();
 
         if (tulosteet) {
-            this.aika.setText(this.kello.toString());
             tulosta(this.ottelu.getPallonhaltija().getNimi() + " harhauttaa komeasti!");
         }
 
@@ -239,17 +188,9 @@ public class Ottelusimulaattori {
 
     private void pallonriisto(Pelaaja puolustaja) {
 
-        try {
-            Thread.sleep(this.viive);
-        } catch (InterruptedException ex) {
-            this.raportti.setText("Ohjelma on kohdannut virheen ja se suljetaan");
-            Thread.currentThread().interrupt();
-        }
-
         this.kello.etene();
 
         if (tulosteet) {
-            this.aika.setText(this.kello.toString());
             tulosta("Pallonriisto! " + puolustaja.getNimi() + " pyrkii nopeaan vastahyökkäykseen.");
         }
 
@@ -263,24 +204,16 @@ public class Ottelusimulaattori {
             maalipaikka();
         } else {
             if (tulosteet) {
-                tulosta("Vastahyökkäys tyrehtyy alkuunsa.");
+                tulosta("Vastahyökkäys kuitenkin tyrehtyy alkuunsa.");
             }
         }
     }
 
     private void maalipaikka() {
 
-        try {
-            Thread.sleep(this.viive);
-        } catch (InterruptedException ex) {
-            this.raportti.setText("Ohjelma on kohdannut virheen ja se suljetaan");
-            Thread.currentThread().interrupt();
-        }
-
         this.kello.etene();
 
         if (tulosteet) {
-            this.aika.setText(this.kello.toString());
             tulosta(this.ottelu.getPallonhaltija().getNimi() + " on maalipaikassa!");
         }
 
@@ -291,8 +224,9 @@ public class Ottelusimulaattori {
         if (this.ottelu.tuleekoMaali()) {
 
             this.ottelu.lisaaMaali();
-            this.tilanne.setText("" + this.ottelu.getKotimaalit() + " - " + this.ottelu.getVierasmaalit());
-            tulosta("Maali! " + this.ottelu.getPallonhaltija() + " venyttää maaliverkkoa!");
+            this.tulostaMaali();
+            tulosta("Maali! " + this.ottelu.getPallonhaltija().getNimi() + " venyttää maaliverkkoa!");
+            this.ottelu.getPallonhaltija().lisaaMaali();
         } else {
             if (tulosteet) {
                 tulosta("Maali jää kuitenkin haaveeksi.");
@@ -305,17 +239,9 @@ public class Ottelusimulaattori {
 
     private void onnistunutSyotto(Pelaaja puolustaja) {
 
-        try {
-            Thread.sleep(this.viive);
-        } catch (InterruptedException ex) {
-            this.raportti.setText("Ohjelma on kohdannut virheen ja se suljetaan");
-            Thread.currentThread().interrupt();
-        }
-
         this.kello.etene();
 
         if (tulosteet) {
-            this.aika.setText(this.kello.toString());
             tulosta(this.ottelu.getPallonhaltija().getNimi() + " saa syötön haltuunsa.");
         }
 
@@ -324,8 +250,37 @@ public class Ottelusimulaattori {
         }
         
         if (this.ottelu.paaseekoMaalipaikkaanSyotosta(puolustaja)) {
+            tulosta("Oivaltava syöttö pelaajalta " + this.ottelu.getEdellinenPallonhaltija().getNimi() + "! Maali häämöttää.");
             maalipaikka();
         }
+    }
+
+    private void tulostaMaali() {
+        
+        this.maalitulostus.put(this.kello.toString(), "" + this.ottelu.getKotimaalit() + " - " + this.ottelu.getVierasmaalit());
+    }
+
+    private void suoritaTulostus() {
+        
+        String tuloste = "";
+        
+        List<String> ajat = new ArrayList();
+        for (String aika : this.tulostus.keySet()) {
+            ajat.add(aika);
+        }
+        
+        Collections.sort(ajat);
+        
+        for (String aika : ajat) {
+            tuloste = tuloste + aika + ": " + this.tulostus.get(aika) + "\n" + "\n";
+            
+            if (this.maalitulostus.containsKey(aika)) {
+                tuloste = tuloste + this.maalitulostus.get(aika) + "\n";
+            }
+        }
+        
+        this.tilanne.setText("" + this.ottelu.getKotimaalit() + " - " + this.ottelu.getVierasmaalit());
+        this.raportti.setText(tuloste);
     }
 
 }

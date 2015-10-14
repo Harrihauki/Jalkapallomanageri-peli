@@ -6,7 +6,14 @@
 package jalkapallomanageri.pelaajaGeneraattori;
 
 import jalkapallomanageri.domain.Pelaaja;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Luo satunnaisesti pelaajat joukkueita varten.
@@ -14,6 +21,9 @@ import java.util.Random;
 public class Pelaajageneraattori {
 
     private Random arpoja;
+    private Scanner lukija;
+    private List<String> etunimet;
+    private List<String> sukunimet;
 
     /**
      *
@@ -22,6 +32,11 @@ public class Pelaajageneraattori {
     public Pelaajageneraattori(Random arpoja) {
 
         this.arpoja = arpoja;
+        this.lukija = null;
+        this.etunimet = new ArrayList();
+        this.sukunimet = new ArrayList();
+        
+        this.luoNimet();
     }
 
     /**
@@ -49,8 +64,10 @@ public class Pelaajageneraattori {
             }
 
         }
+        
+        String nimi = this.etunimet.get(this.arpoja.nextInt(this.etunimet.size())) + " " + this.sukunimet.get(this.arpoja.nextInt(this.sukunimet.size()));
 
-        Pelaaja pelaaja = new Pelaaja("" + this.arpoja.nextInt(1000), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo());
+        Pelaaja pelaaja = new Pelaaja(nimi, this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo(), this.arvoArvo());
 
         return pelaaja;
     }
@@ -85,6 +102,36 @@ public class Pelaajageneraattori {
         } else {
             return 10;
         }
+    }
+
+    private void luoNimet() {
+        
+        File etunimet = new File("etunimet.txt");
+        File sukunimet = new File("sukunimet.txt");
+        
+        try {
+            this.lukija = new Scanner(etunimet);
+        } catch (FileNotFoundException ex) {
+            System.out.println("tiedostoa ei löydy");
+        }
+        
+        while(lukija.hasNextLine()) {
+            this.etunimet.add(lukija.nextLine());
+        }
+        
+        this.lukija.close();
+        
+        try {
+            this.lukija = new Scanner(sukunimet);
+        } catch (FileNotFoundException ex) {
+            System.out.println("Tiedostoa ei löydy");
+        }
+        
+        while(lukija.hasNextLine()) {
+            this.sukunimet.add(lukija.nextLine());
+        }
+        
+        
     }
 
 }

@@ -22,6 +22,7 @@ public class Pelaaja {
     private boolean loukkaantunut;
     private int pelipaikka;
     private int sijainti;
+    private int tehdytMaalit;
     
     /**
      *
@@ -47,6 +48,7 @@ public class Pelaaja {
         this.loukkaantunut = false;
         this.pelipaikka = 0;
         this.sijainti = 0;
+        this.tehdytMaalit = 0;
     }
     
     /**
@@ -56,6 +58,16 @@ public class Pelaaja {
     public String getNimi() {
         
         return this.nimi;
+    }
+    
+    public int getTehdytMaalit() {
+        
+        return this.tehdytMaalit;
+    }
+    
+    public void lisaaMaali() {
+        
+        this.tehdytMaalit++;
     }
     
     /**
@@ -133,7 +145,7 @@ public class Pelaaja {
     @Override
     public String toString() {
         
-        return this.nimi + "\nSijoittuminen: " + this.sijoittuminen + "\nNopeus: " + this.nopeus + "\nMaalinteko: " + this.maalinteko + "\nSyöttäminen: " + this.syottaminen + "\nPuolustus: " + this.puolustus + "\nHarhauttaminen: " + this.harhauttaminen + "\nMaalivahti: " + this.maalivahti + "\nLoukkaantunut: " + this.loukkaantunut;
+        return this.nimi + "\nSijoittuminen: " + this.sijoittuminen + "\nNopeus: " + this.nopeus + "\nMaalinteko: " + this.maalinteko + "\nSyöttäminen: " + this.syottaminen + "\nPuolustus: " + this.puolustus + "\nHarhauttaminen: " + this.harhauttaminen + "\nMaalivahti: " + this.maalivahti + "\nLoukkaantunut: " + this.loukkaantunut + "\n" + "\nTehdyt maalit: " + this.tehdytMaalit;
     }
 
     /**
