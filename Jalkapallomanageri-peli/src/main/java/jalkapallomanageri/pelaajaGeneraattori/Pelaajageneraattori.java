@@ -104,6 +104,11 @@ public class Pelaajageneraattori {
         }
     }
 
+    /**
+     * Lisää tiedostosta oliomuuttujalistoihin etu- ja sukunimet, joista pelaajien
+     * nimet satunnaisesti muodostetaan.
+     * 
+     */
     private void luoNimet() {
         
         File etunimet = new File("etunimet.txt");

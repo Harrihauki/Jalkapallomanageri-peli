@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import javax.swing.JTextArea;
 
 /**
+ * Pelaajat-välilehteä varten luotavat napit, joita klikkaamalla tulostetaan
+ * pelaajien tiedot ja taidot.
  *
  * @author lallimyl
  */
@@ -27,6 +29,11 @@ public class PelaajaNappi extends JButton implements ActionListener {
         this.tekstikentta = tekstikentta;
     }
     
+    /**
+     * Klikkaamalla näytetään pelaajan tiedot.
+     * 
+     * @param e 
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         

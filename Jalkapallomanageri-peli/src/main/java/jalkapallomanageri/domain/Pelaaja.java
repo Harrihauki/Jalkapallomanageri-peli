@@ -6,7 +6,7 @@
 package jalkapallomanageri.domain;
 
 /**
- * Luokka pitää yllä pelaajan tiedot
+ * Luokka pitää yllä pelaajan tiedot.
  * 
  */
 public class Pelaaja {
@@ -65,6 +65,10 @@ public class Pelaaja {
         return this.tehdytMaalit;
     }
     
+    /**
+     * Metodi lisää pelaajalle yhden maalin lisää kutsuttaessa. Näin pidetään
+     * kirjaa pelaajien maalimääristä kauden aikana.
+     */
     public void lisaaMaali() {
         
         this.tehdytMaalit++;
@@ -205,8 +209,9 @@ public class Pelaaja {
     }
     
     /**
+     * Palauttaa pelaajan sijainnin kentällä.
      *
-     * @return
+     * @return String   sijainti muodossa "x,y"
      */
     public String koordinaattiEsitys() {
         

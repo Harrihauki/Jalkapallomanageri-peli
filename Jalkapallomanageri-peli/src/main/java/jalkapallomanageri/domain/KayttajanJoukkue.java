@@ -6,7 +6,8 @@
 package jalkapallomanageri.domain;
 
 /**
- * Luokka määritteleen käyttäjän joukkueelle ominaista toimintaa
+ * Luokka määritteleen käyttäjän joukkueelle ominaista toimintaa, tai tarkemmin
+ * erittelee sen BottiJoukkue-luokan olioista.
  * 
  */
 public class KayttajanJoukkue extends Joukkue {

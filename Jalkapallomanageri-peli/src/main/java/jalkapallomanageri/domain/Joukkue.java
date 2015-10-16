@@ -77,6 +77,10 @@ public abstract class Joukkue {
     }
     
     /**
+     * Metodi täällä helpottamassa käyttöliittymän toimintaa. Bottijoukkue-luokka
+     * ylikirjoittaa metodin omaan käyttöönsä, KayttajanJoukkue-luokka puolestaan
+     * ei. Näin Joukkueista koostuvan listan kaikille alkioille voi kutsua metodia
+     * ilman "sivuoireita".
      *
      */
     public void setMuodostelma() {

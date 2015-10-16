@@ -20,6 +20,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 
 /**
+ * Ottelusimulaattori simuloi parametrinä saadun ottelun.
  *
  * @author lallimyl
  */
@@ -52,6 +53,12 @@ public class Ottelusimulaattori {
         this.maalitulostus = new HashMap();
     }
 
+    /**
+     * Metodi sisältää ottelutapahtumista vastaavan while-luupin, joka pyörii 
+     * niin kauan, kuin peliaikaa on jäljellä. Jokainen tapahtuma siirtää kelloa
+     * puoli minuuttia eteenpäin.
+     * 
+     */
     public void pelaa() {
         cl.show(jPanel4, "card4");  
         if (this.tulosteet) {
@@ -71,10 +78,15 @@ public class Ottelusimulaattori {
                 this.syotto(puolustaja);
             }
         }
-//        
+        
         this.suoritaTulostus();
     }
 
+    /**
+     * Metodi laskee eri pelipaikoilla olevien pelaajien määrät ja tulostaa 
+     * muodostelman "numeroesityksen".
+     * 
+     */
     private void alkuSpiikki() {
 
         int kotipuolustajat = 0;
@@ -110,6 +122,12 @@ public class Ottelusimulaattori {
 
     }
 
+    /**
+     * Metodi true, jos peliaikaa on vielä jäljellä, ja false, jos peliaika on 
+     * täynnä.
+     * 
+     * @return  boolean     onko aikaa vielä jäljellä
+     */
     private boolean onkoAikaa() {
 
         if (this.kello.toString().equals("90:00")) {
@@ -119,6 +137,12 @@ public class Ottelusimulaattori {
         return true;
     }
 
+    /**
+     * Metodia kutsutaan, jos pelaa()-metodissa pelaaja päättää lähteä harhauttamaan.
+     * Päätöksestä tehdään tuloste, ja tarkistetaan, onnistuuko harhautus.
+     * 
+     * @param puolustaja    pelaajaa vastaan asettuva vastustajan pelaaja
+     */
     private void harhautus(Pelaaja puolustaja) {
 
         this.kello.etene();
@@ -138,6 +162,13 @@ public class Ottelusimulaattori {
         }
     }
 
+    /**
+     * Metodia kutsutaan, jos pelaa()-metodissa pelaaja päättää lähteä syöttämään.
+     * Päätöksestä tehdään tuloste, arvotaan syötön kohde ja tarkistetaan, onnistuuko
+     * syöttö.
+     * 
+     * @param puolustaja    Pelaaja     vastaan asettuva vastustajan pelaaja
+     */
     private void syotto(Pelaaja puolustaja) {
 
         this.kello.etene();
@@ -160,17 +191,30 @@ public class Ottelusimulaattori {
         }
     }
 
+    /**
+     * Asettaa tapahtumaa vastaavan kellonajan ja tulosteen HashMapiin.
+     * 
+     * @param uusiTuloste   String  tuloste, joka asetetaan Mapiin.
+     */
     private void tulosta(String uusiTuloste) {
 
         this.tulostus.put(this.kello.toString(), uusiTuloste);
     }
 
+    /**
+     * Kutsutaan, jos harhautus onnistuu. Suoritetaan tuloste ja tarkistetaan,
+     * pääseekö pelaaja harhautuksestaan maalipaikkaan. Jos ei, palataan pelaa-
+     * metodin while-loopiin.
+     * 
+     * @param puolustaja 
+     */
     private void onnistunutHarhautus(Pelaaja puolustaja) {
 
         this.kello.etene();
+        String tuloste = "";
 
         if (tulosteet) {
-            tulosta(this.ottelu.getPallonhaltija().getNimi() + " harhauttaa komeasti!");
+            tuloste = this.ottelu.getPallonhaltija().getNimi() + " harhauttaa komeasti!";
         }
 
         if (!onkoAikaa()) {
@@ -178,20 +222,29 @@ public class Ottelusimulaattori {
         }
 
         if (this.ottelu.paaseekoMaalipaikkaanHarhautuksesta(puolustaja)) {
+            tulosta(tuloste);
             maalipaikka();
         } else {
             if (tulosteet) {
-                tulosta("Maalipaikkaa ei kuitenkaan synny");
+                tulosta(tuloste + "\nMaalipaikkaa ei kuitenkaan synny");
             }
         }
     }
 
+    /**
+     * Kutsutaan, jos harhautus tai syöttö epäonnistuu. Asettaa pallollista pelaajaa
+     * vastaan pelanneen puolustajan uudeksi pallonhaltijaksi, joka yrittää päästä
+     * vastahyökkäykseen.
+     * 
+     * @param puolustaja Pelaaja    riiston tehnyt pelaaja
+     */
     private void pallonriisto(Pelaaja puolustaja) {
 
         this.kello.etene();
+        String tuloste = "";
 
         if (tulosteet) {
-            tulosta("Pallonriisto! " + puolustaja.getNimi() + " pyrkii nopeaan vastahyökkäykseen.");
+            tuloste = "Pallonriisto! " + puolustaja.getNimi() + " pyrkii nopeaan vastahyökkäykseen.";
         }
 
         if (!onkoAikaa()) {
@@ -201,14 +254,22 @@ public class Ottelusimulaattori {
         this.ottelu.setPallonhaltija(puolustaja);
 
         if (this.ottelu.tuleekoVastahyokkays()) {
+            tulosta(tuloste);
             maalipaikka();
         } else {
             if (tulosteet) {
-                tulosta("Vastahyökkäys kuitenkin tyrehtyy alkuunsa.");
+                tulosta(tuloste + "\nVastahyökkäys kuitenkin tyrehtyy alkuunsa.");
             }
         }
     }
 
+    /**
+     * Kutsutaan, jos pelaaja pääsee harhautuksesta tai syötöstä maalipaikkaan.
+     * Tarkistetaan, tuleeko maali. Jos tulee, niin ottelun tilannetta muutetaan,
+     * ja maalin tehneelle pelaajalle lisätään maali. Jos ei, niin pallo siirtyy
+     * vastustajalle ja palataan Pelaa-metodin luupiin. Pallo siirtyy vastustajalle.
+     * 
+     */
     private void maalipaikka() {
 
         this.kello.etene();
@@ -231,12 +292,17 @@ public class Ottelusimulaattori {
             if (tulosteet) {
                 tulosta("Maali jää kuitenkin haaveeksi.");
             }
-
         }
 
         this.ottelu.setPallonhaltija(this.ottelu.ketaVastaan());
     }
 
+    /**
+     * Kutsutaan, jos syöttö onnistuu. Tarkistetaan, pääseekö pelaaja maalipaikkaan
+     * syötöstä.
+     * 
+     * @param puolustaja    Pelaaja vastustajan pelaaja.
+     */
     private void onnistunutSyotto(Pelaaja puolustaja) {
 
         this.kello.etene();
@@ -255,11 +321,19 @@ public class Ottelusimulaattori {
         }
     }
 
+    /**
+     * Rakentaa maalille oman tulosteen.
+     * 
+     */
     private void tulostaMaali() {
         
         this.maalitulostus.put(this.kello.toString(), "" + this.ottelu.getKotimaalit() + " - " + this.ottelu.getVierasmaalit());
     }
 
+    /**
+     * Jos tulosteet-muuttuja on arvoltaan true, tulostetaan lopuksi ottelutapahtumat.
+     * 
+     */
     private void suoritaTulostus() {
         
         String tuloste = "";

@@ -45,11 +45,19 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         this.maalattavat = new HashMap();
         this.ottelut = null;
     }
+    
+    /**
+     * Kokoonpanoasetinta varten tehty metodi, joka poistaa kokoonpanosta parametrina
+     * syötetyn pelaajan, esimerkiksi jos pelaajan pelipaikalle syötetään toinen
+     * pelaaja.
+     * 
+     * @param muodostelma   Muodostelma-olio, josta pelaaja halutaan poistaa
+     * @param pelaaja   Pelaaja-olio, joka halutaan poistaa
+     */
 
     private void pelaajanPoisto(Muodostelma muodostelma, Pelaaja pelaaja) {
 
         if (pelaaja == null) {
-            System.out.println("terve");
             return;
         }
 
@@ -58,18 +66,15 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
                 muodostelma.poistaMaalivahti();
                 this.maalattavat.get("MV").setBackground(Color.lightGray);
                 this.maalattavat.remove("MV");
-                System.out.println("hei");
             } else {
                 muodostelma.getAvauskentallinen().remove(pelaaja);
                 this.maalattavat.get("" + pelaaja.getPelipaikka() + "." + pelaaja.getSijainti()).setBackground(Color.lightGray);
                 this.maalattavat.remove("" + pelaaja.getPelipaikka() + "." + pelaaja.getSijainti());
-                System.out.println("sunnuntai");
             }
         } else {
             muodostelma.getAvauskentallinen().remove(pelaaja);
             this.maalattavat.get("" + pelaaja.getPelipaikka() + "." + pelaaja.getSijainti()).setBackground(Color.lightGray);
             this.maalattavat.remove("" + pelaaja.getPelipaikka() + "." + pelaaja.getSijainti());
-            System.out.println("moikka");
         }
     }
 
@@ -679,8 +684,16 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Aloitusnäytön "Pelaajat"-nappia painettaessa, luodaan joukkueen pelaajia
+     * vastaavat napit - "PelaajaNapit" -, joita painamalla saa nähtäväkseen
+     * pelaajan taidot ja tiedot.
+     * 
+     * @param evt 
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
+        jPanel1.removeAll();
         jTextArea1.setText("");
 
         for (Pelaaja pelaaja : this.sarja.getJoukkueet().get(0).getPelaajat().values()) {
@@ -694,6 +707,11 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    /**
+     * "Sarjataulukko"-nappia painamalla saa nähtäväkseen sarjataulukon.
+     * 
+     * @param evt 
+     */
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
         jPanel1.removeAll();
@@ -705,6 +723,11 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         jTextArea1.setText(taulukko.toString());
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    /**
+     * "Seuraava ottelu"-nappia painamalla pääsee kokoonpanoasettimeen.
+     * 
+     * @param evt 
+     */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
         sarja.getJoukkueet().get(0).getMuodostelma().alustaMuodostelma();
@@ -729,6 +752,12 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    /**
+     * Valitsemalla jonkun pelaajan kokoonpanoasettimen listasta, tulostetaan
+     * pelaajan taidot käyttäjän nähtäville.
+     * 
+     * @param evt 
+     */
     private void jList1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jList1MouseClicked
 
         Map<String, Pelaaja> pelaajat = sarja.getJoukkueet().get(0).getPelaajat();
@@ -738,6 +767,13 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         jTextArea2.setText(pelaaja.toString());
     }//GEN-LAST:event_jList1MouseClicked
 
+    /**
+     * Painamalla "MV"-nappia, valittuna oleva pelaaja laitetaan kokoonpanoon
+     * maalivahdiksi. Samalla pelaaja poistetaan mahdollisesta aiemmasta sijain-
+     * nistaan, samaten kuin mahdollinen jo syötetty maalivahti poistetaan kokoonpanosta.
+     * 
+     * @param evt 
+     */
     private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
 
         if (jList1.getSelectedValue() == null) {
@@ -768,6 +804,13 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
+    /**
+     * "Otteluun"-napista luodaan kierroksen ottelut, sekä luodaan ja simuloidaan
+     * käyttäjän joukkueen ottelu. Käyttäjän ei anneta siirtyä otteluun ennen kuin
+     * asiallinen kokoonpano on syötetty.
+     * 
+     * @param evt 
+     */
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
         Muodostelma muodostelma = sarja.getJoukkueet().get(0).getMuodostelma();
@@ -782,21 +825,23 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         }
 
         this.ottelut = this.sarja.luoKierroksenOttelut();
-//        this.ottelut = new ArrayList();
-//        for (int i = 0; i < 2; i+=2) {
-//            this.ottelut.add(new Ottelu(this.sarja.getJoukkueet().get(i), this.sarja.getJoukkueet().get(i+1), new Random()));
-//        }
+
         CardLayout cl = (CardLayout) (jPanel4.getLayout());
 
-//        ottelut.get(0).getVieras().setMuodostelma();
         Ottelusimulaattori kayttajanOttelu = new Ottelusimulaattori(ottelut.get(0), jTextArea3, jTextPane1, jTextPane2, jLabel1, true, cl, jPanel4);
-//
+
         kayttajanOttelu.pelaa();
-//
+
         jButton31.setEnabled(true);
         //ottelun aloitus
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    /**
+     * Alla olevat metodit asettavat valitun pelaajan nappia vastaavalle 
+     * pelipaikalle.
+     * 
+     * @param evt 
+     */
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
 
         this.pelaajanLisays(1, 1);
@@ -947,6 +992,12 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         this.napinMaalaus("5.5", jButton30);
     }//GEN-LAST:event_jButton30ActionPerformed
 
+    /**
+     * "Jatka"-napista simuloidaan kierroksen muut ottelut ja näytetään lopuksi
+     * kaikki kierroksen tulokset.
+     * 
+     * @param evt 
+     */
     private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
 
         jButton31.setEnabled(false);
@@ -976,6 +1027,12 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         cl.show(jPanel4, "card5");
     }//GEN-LAST:event_jButton31ActionPerformed
 
+    /**
+     * "Jatka"-napista lisätään kaikille joukkueille tuloksen mukaiset piste-
+     * ja maalimäärät, sekä siirrytään takaisin aloitusruutuun.
+     * 
+     * @param evt 
+     */
     private void jButton32ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton32ActionPerformed
 
         List<Pisteenlaskija> pisteet = this.sarja.getSarjataulukko().getPisteenlaskijat();
@@ -1129,6 +1186,14 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     private javax.swing.JTextPane jTextPane2;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Metodi lisää valitun pelaajan valitulle pelipaikalle, poistaa mahdollisen
+     * aiemmin pelipaikalle olleen pelaajan kokoonpanosta, sekä vapauttaa valitun
+     * pelaajan mahdollisen aiemman pelipaikan.
+     * 
+     * @param pelipaikka    int    pelaajan sijainti syvyyssuunnassa
+     * @param sijainti      int    pelaajan sijainti leveyssuunnassa
+     */
     private void pelaajanLisays(int pelipaikka, int sijainti) {
 
         if (jList1.getSelectedValue() == null) {
@@ -1157,7 +1222,6 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         }
 
         if (muodostelma.pelaajaOnJoAsetettu(pelaaja.getNimi(), pelaajat)) {
-            System.out.println("termos");
 
             pelaajanPoisto(muodostelma, pelaaja);
         }
@@ -1165,13 +1229,16 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         muodostelma.lisaaPelaajaPaikalleen(pelaaja.getNimi(), pelipaikka, sijainti, pelaajat);
 
         if (muodostelma.getAvauskentallinen().size() > 10) {
-            System.out.println("tulivuori");
             this.pelaajanPoisto(muodostelma, muodostelma.getAvauskentallinen().get(0));
         }
-
-        System.out.println("moi");
     }
 
+    /**
+     * Värjää varatun pelipaikan punaiseksi.
+     * 
+     * @param paikka
+     * @param nappi 
+     */
     private void napinMaalaus(String paikka, JButton nappi) {
 
         this.maalattavat.put(paikka, nappi);

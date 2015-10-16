@@ -32,7 +32,13 @@ public class Kello {
             minuutit.seuraava();
         }
     }
-     
+    
+    /**
+     * Tulostetaan "kellotaulu"
+     * 
+     * @return 
+     */
+    @Override
     public String toString() {
         
         return minuutit.toString() + ":" + sekunnit.toString();

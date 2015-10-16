@@ -39,6 +39,11 @@ public class YlhaaltaRajoitettuLaskuri {
         return this.arvo;
     }
 
+    /**
+     * Lisätään etunolla, jos kellon arvo on alle 10.
+     * 
+     * @return 
+     */
     @Override
     public String toString() {
         String etunolla = "0";

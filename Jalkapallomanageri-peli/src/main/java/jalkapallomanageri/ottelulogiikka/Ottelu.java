@@ -201,7 +201,7 @@ public class Ottelu {
     }
 
     /**
-     * Laskee oman pelaajan etäisyyden halutusta pelaajasta
+     * Laskee oman yksittäisen pelaajan etäisyyden halutusta pelaajasta
      *
      * @param pelaaja
      * @param vertailtava
@@ -285,7 +285,7 @@ public class Ottelu {
     }
     
     /**
-     * Arpoo halutun listan pelaajista parametrin mukaisesta määrästä ensimmäisiä,
+     * Arpoo halutun listan parametrin mukaisesta määrästä ensimmäisiä pelaajia,
      * kuka otetaan kohteeksi. Esimerkiksi syötön kohteet ja puolustajat arvotaan
      * tällä.
      * 
