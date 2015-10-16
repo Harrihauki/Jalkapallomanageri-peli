@@ -139,6 +139,10 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         jTextArea4 = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jButton32 = new javax.swing.JButton();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextArea5 = new javax.swing.JTextArea();
+        jButton33 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -671,6 +675,40 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
         jPanel4.add(jPanel6, "card5");
 
+        jTextArea5.setColumns(20);
+        jTextArea5.setRows(5);
+        jScrollPane8.setViewportView(jTextArea5);
+
+        jButton33.setText("Lopeta");
+        jButton33.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton33ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                .addComponent(jButton33)
+                .addGap(124, 124, 124))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton33)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(101, Short.MAX_VALUE))
+        );
+
+        jPanel4.add(jPanel8, "card6");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -731,6 +769,8 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
      */
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
+        this.jTextArea1.setText("");
+        
         sarja.getJoukkueet().get(0).getMuodostelma().alustaMuodostelma();
         Map<String, Pelaaja> pelaajat = sarja.getJoukkueet().get(0).getPelaajat();
         DefaultListModel malli = new DefaultListModel();
@@ -1087,10 +1127,20 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         }
 
         this.sarja.seuraavaKierros();
+        
+        if (this.sarja.getKierrokset()==10) {
+            
+            this.lopetaPeli();
+        }
 
         CardLayout cl = (CardLayout) (jPanel4.getLayout());
         cl.show(jPanel4, "card2");
     }//GEN-LAST:event_jButton32ActionPerformed
+
+    private void jButton33ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton33ActionPerformed
+        
+        System.exit(0);
+    }//GEN-LAST:event_jButton33ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1156,6 +1206,7 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     private javax.swing.JButton jButton30;
     private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton32;
+    private javax.swing.JButton jButton33;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
@@ -1172,6 +1223,7 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1179,10 +1231,12 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
+    private javax.swing.JTextArea jTextArea5;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
     // End of variables declaration//GEN-END:variables
@@ -1248,5 +1302,13 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
             button.setBackground(Color.red);
         }
+    }
+
+    private void lopetaPeli() {
+        
+        Sarjataulukko taulukko = this.sarja.getSarjataulukko();
+        taulukko.jarjesta();
+
+        jTextArea5.setText("Sarja on päättynyt!\nMestariksi julistetaan " + taulukko.getPisteenlaskijat().get(0).getJoukkue().getNimi() + "\n" + "\n" + taulukko.toString());
     }
 }

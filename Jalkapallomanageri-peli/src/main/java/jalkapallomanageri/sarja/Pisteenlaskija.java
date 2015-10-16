@@ -113,7 +113,7 @@ public class Pisteenlaskija implements Comparable {
                 return 1;
             }
             
-            return -vertailtava.getMaaliero() - this.getMaaliero();
+            return vertailtava.getMaaliero() - this.getMaaliero();
         }
         
         return vertailtava.getPisteet() - this.pisteet;

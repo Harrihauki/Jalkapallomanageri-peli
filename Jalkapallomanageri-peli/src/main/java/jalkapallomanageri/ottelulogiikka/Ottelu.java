@@ -370,7 +370,7 @@ public class Ottelu {
             maalivahti = this.kotiMV;
         }
         
-        double taitojenSumma = this.pallonhaltija.getMaalinteko() + this.pallonhaltija.getHarhauttaminen() + maalivahti.getSijoittuminen() + maalivahti.getMaalivahti();
+        double taitojenSumma = this.pallonhaltija.getMaalinteko() + this.pallonhaltija.getHarhauttaminen() + maalivahti.getSijoittuminen() + maalivahti.getMaalivahti() + 5;
         double taitojenSuhde = (this.pallonhaltija.getMaalinteko() + this.pallonhaltija.getHarhauttaminen()) / taitojenSumma;
         
         double onnistuminen = this.arpoja.nextDouble();
@@ -410,7 +410,7 @@ public class Ottelu {
      */
     public boolean lahteekoHarhauttamaan() {
         
-        int tekijoidenSumma = this.pallonhaltija.getPelipaikka() + 10;
+        int tekijoidenSumma = this.pallonhaltija.getPelipaikka() + 8;
         double suhdeluku = this.pallonhaltija.getPelipaikka() / tekijoidenSumma;
         
         double paatos = this.arpoja.nextDouble();
