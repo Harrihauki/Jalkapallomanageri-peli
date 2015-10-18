@@ -35,3 +35,7 @@
 13.10. 6h - Hirveetä tappelua käyttöliittymän kanssa. Huhhuh..
 
 14.10. 7h - Sama jatkuu. Tänään lähti rullaamaan paremmin ja homma alkaa olla finaalissa ohjelmoimisen osalta. Otteluiden luominen korjattu. Pelaajilla nykyisin ihan oikeita nimiä.
+
+16.10. 4h - Demo. Hienosäätöä, dokumentointia, viimeisen palautuksen valmistelua, mm. .jar-tiedosto.
+
+18.10. 1,5h - Viimeistä hiomista. Lopullinen luokkakaavio. Gitin kanssa vääntämistä, kun ensimmäistä kertaa omalla koneella väännän tätä..
